@@ -1,7 +1,7 @@
 {
   "name": "avaliacao-neonatal-sbp-2022",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "App clínico de apoio à avaliação neonatal: Apgar ampliado, Capurro e classificação PIG/AIG/GIG conforme SBP 2022",
   "scripts": {
