@@ -1,4 +1,0 @@
-# Cloudflare Pages SPA fallback
-# Qualquer rota desconhecida cai no index.html para o React Router resolver.
-# (Sem isso, /relatorio retorna 404 ao recarregar a pagina.)
-/*    /index.html   200
