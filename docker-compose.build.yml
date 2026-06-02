@@ -1,0 +1,21 @@
+# =========================================================
+# Avaliacao Neonatal SBP 2022 — Compose usado APENAS para build/push.
+#
+# Existe porque rodar `docker compose -p avaliacao-neonatal build`
+# faz o Docker Desktop mostrar "avaliacao-neonatal" no historico
+# de builds (em vez do nome da pasta atual).
+#
+# Nao e o compose de runtime — nao tem ports/volumes/env_file.
+# Para rodar o container localmente, use start.bat (em dev)
+# ou monte um stack no Portainer com:
+#   image: renatorcm/avaliacao-neonatal-sbp2022:vX.Y.Z
+#   ports: ["80:80"]
+# =========================================================
+
+services:
+  avaliacao-neonatal:
+    image: renatorcm/avaliacao-neonatal-sbp2022:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      pull: true

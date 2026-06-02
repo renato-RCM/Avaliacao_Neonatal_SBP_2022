@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260" role="img" aria-label="Apgar - Resp. 0 ponto - Ausente">
+  <rect x="8" y="8" width="344" height="244" rx="24" fill="#fffaf7" stroke="#3f3a3a" stroke-width="3"/>
+  <rect x="8" y="8" width="344" height="58" rx="24" fill="#f1e7df"/>
+  <text x="180" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2f2a2a">Apgar - Resp. 0 ponto</text>
+  <g transform="translate(70,78)"><path d="M100 30 C78 48,72 76,72 116 C72 135,96 138,104 118 C112 95,112 62,106 34 Z" fill="#e8f2ff" stroke="#2f2a2a" stroke-width="5"/><path d="M120 30 C142 48,148 76,148 116 C148 135,124 138,116 118 C108 95,108 62,114 34 Z" fill="#e8f2ff" stroke="#2f2a2a" stroke-width="5"/><path d="M110 16 V80" stroke="#2f2a2a" stroke-width="7" stroke-linecap="round"/><line x1="55" y1="22" x2="165" y2="132" stroke="#2f2a2a" stroke-width="7"/><line x1="165" y1="22" x2="55" y2="132" stroke="#2f2a2a" stroke-width="7"/></g>
+  <text x="180" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2f2a2a">Ausente</text>
+</svg>

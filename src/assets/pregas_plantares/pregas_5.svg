@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Pregas plantares - marcas mal definidas na metade anterior - 5 pontos">
+  <rect x="8" y="8" width="496" height="496" rx="28" fill="#ffffff" stroke="#263238" stroke-width="4"/>
+  <text x="256" y="46" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#263238">Pregas plantares</text>
+  <text x="256" y="78" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#455a64">marcas mal definidas na metade anterior</text>
+  <g stroke="#263238" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M185 320 C130 280 150 170 220 155 C310 135 365 220 325 300 C295 360 225 350 185 320 Z"/>
+    <circle cx="225" cy="128" r="12"/><circle cx="255" cy="120" r="10"/><circle cx="282" cy="122" r="9"/><circle cx="306" cy="132" r="8"/><circle cx="326" cy="148" r="7"/><path d="M205 245 C235 230 270 232 298 250" stroke-width="4" opacity="0.7"/></g>
+  <rect x="176" y="422" width="160" height="54" rx="16" fill="#f5f5f5" stroke="#263238" stroke-width="3"/>
+  <text x="256" y="459" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#263238">5 pts</text>
+  <text x="256" y="496" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#607d8b">Capurro</text>
+</svg>

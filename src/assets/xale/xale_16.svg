@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Sinal do xale - entre linha média e axilar do mesmo lado - 16 pontos">
+  <rect x="8" y="8" width="496" height="496" rx="28" fill="#ffffff" stroke="#263238" stroke-width="4"/>
+  <text x="256" y="46" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#263238">Sinal do xale</text>
+  <text x="256" y="78" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#455a64">entre linha média e axilar do mesmo lado</text>
+  <g stroke="#263238" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="256" cy="128" r="38"/>
+    <path d="M205 178 C190 238 190 295 210 345"/><path d="M307 178 C322 238 322 295 302 345"/>
+    <path d="M256 175 V350" stroke-width="3" opacity="0.45"/>
+    <path d="M205 185 V340" stroke-width="3" opacity="0.25"/><path d="M307 185 V340" stroke-width="3" opacity="0.25"/>
+    <path d="M210 345 H302"/><path d="M285 242 C260 232 235 244 292 254"/><circle cx="292" cy="254" r="7" fill="#263238" stroke="none"/></g>
+  <rect x="176" y="422" width="160" height="54" rx="16" fill="#f5f5f5" stroke="#263238" stroke-width="3"/>
+  <text x="256" y="459" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#263238">16 pts</text>
+  <text x="256" y="496" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#607d8b">Capurro</text>
+</svg>

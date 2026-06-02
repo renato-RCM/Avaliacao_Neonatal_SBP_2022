@@ -1,0 +1,50 @@
+# =========================================================
+# Arquivos/pastas que NAO vao para a imagem Docker.
+# Manter essa lista enxuta deixa a imagem menor e o build mais rapido.
+# =========================================================
+
+# Dependencias (instaladas dentro do build)
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build local (sera regerada dentro do container)
+dist
+dist-ssr
+coverage
+.vite
+.tsbuildinfo
+*.tsbuildinfo
+
+# Variaveis de ambiente — NUNCA dentro da imagem
+.env
+.env.*
+!.env.example
+
+# Git / IDE
+.git
+.gitignore
+.gitattributes
+.vscode
+.idea
+*.iml
+
+# Scripts/notas que so servem em dev local
+*.bat
+*.ps1
+.dockerignore
+Dockerfile
+docker-compose*.yml
+README.md
+README*.md
+docs
+
+# Tests e temporarios
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Arquivos de spec que ja foram migrados para docs/
+Especificaoes_projeto

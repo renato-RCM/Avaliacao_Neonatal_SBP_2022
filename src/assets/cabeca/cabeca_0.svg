@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Posição da cabeça - cabeça deflexionada ~270° - 0 pontos">
+  <rect x="8" y="8" width="496" height="496" rx="28" fill="#ffffff" stroke="#263238" stroke-width="4"/>
+  <text x="256" y="46" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#263238">Posição da cabeça</text>
+  <text x="256" y="78" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#455a64">cabeça deflexionada ~270°</text>
+  <g stroke="#263238" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M180 335 H350"/><path d="M245 335 L305 245"/><path d="M305 245 C335 210 380 220 390 260 C400 300 360 325 325 305"/>
+    <path d="M245 335 C210 285 215 235 250 195" opacity="0.5"/><circle cx="175" cy="235" r="34"/><path d="M210 245 L245 335"/><path d="M132 382 A120 120 0 0 1 245 335" stroke-width="3" opacity="0.5"/><text x="135" y="395" font-family="Arial" font-size="22" fill="#263238" stroke="none">270°</text></g>
+  <rect x="176" y="422" width="160" height="54" rx="16" fill="#f5f5f5" stroke="#263238" stroke-width="3"/>
+  <text x="256" y="459" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#263238">0 pts</text>
+  <text x="256" y="496" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#607d8b">Capurro</text>
+</svg>

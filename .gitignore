@@ -1,0 +1,33 @@
+# Dependencias
+node_modules
+
+# Build outputs
+dist
+dist-ssr
+coverage
+.vite
+*.tsbuildinfo
+
+# Logs e temporarios
+*.log
+*.tmp
+*.local
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Pasta original de especificacoes (migrada para docs/)
+Especificaoes_projeto
+
+# Backups locais
+*.bak
+*.orig

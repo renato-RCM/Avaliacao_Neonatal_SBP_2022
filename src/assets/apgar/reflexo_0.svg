@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260" role="img" aria-label="Apgar - Reflexo 0 ponto - Sem resposta">
+  <rect x="8" y="8" width="344" height="244" rx="24" fill="#fffaf7" stroke="#3f3a3a" stroke-width="3"/>
+  <rect x="8" y="8" width="344" height="58" rx="24" fill="#f1e7df"/>
+  <text x="180" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2f2a2a">Apgar - Reflexo 0 ponto</text>
+  <g transform="translate(70,78)"><circle cx="110" cy="72" r="48" fill="#ffe8d6" stroke="#2f2a2a" stroke-width="5"/><circle cx="94" cy="62" r="5" fill="#2f2a2a"/><circle cx="126" cy="62" r="5" fill="#2f2a2a"/><line x1="84" y1="100" x2="136" y2="100" stroke="#2f2a2a" stroke-width="5" stroke-linecap="round"/><path d="M158 48 l32 -18" stroke="#2f2a2a" stroke-width="5"/><path d="M178 24 l14 6 l-10 12" fill="none" stroke="#2f2a2a" stroke-width="4"/></g>
+  <text x="180" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2f2a2a">Sem resposta</text>
+</svg>

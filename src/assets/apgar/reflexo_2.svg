@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260" role="img" aria-label="Apgar - Reflexo 2 pontos - Choro / retirada">
+  <rect x="8" y="8" width="344" height="244" rx="24" fill="#fffaf7" stroke="#3f3a3a" stroke-width="3"/>
+  <rect x="8" y="8" width="344" height="58" rx="24" fill="#f1e7df"/>
+  <text x="180" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2f2a2a">Apgar - Reflexo 2 pontos</text>
+  <g transform="translate(70,78)"><circle cx="110" cy="72" r="48" fill="#ffe8d6" stroke="#2f2a2a" stroke-width="5"/><circle cx="94" cy="62" r="5" fill="#2f2a2a"/><circle cx="126" cy="62" r="5" fill="#2f2a2a"/><ellipse cx="110" cy="99" rx="15" ry="20" fill="#2f2a2a"/><path d="M158 48 l32 -18" stroke="#2f2a2a" stroke-width="5"/><path d="M178 24 l14 6 l-10 12" fill="none" stroke="#2f2a2a" stroke-width="4"/><path d="M50 140 C30 118,42 92,64 102" fill="none" stroke="#2f2a2a" stroke-width="6" stroke-linecap="round"/></g>
+  <text x="180" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2f2a2a">Choro / retirada</text>
+</svg>

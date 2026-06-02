@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Textura da pele - muito fina e gelatinosa - 0 pontos">
+  <rect x="8" y="8" width="496" height="496" rx="28" fill="#ffffff" stroke="#263238" stroke-width="4"/>
+  <text x="256" y="46" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#263238">Textura da pele</text>
+  <text x="256" y="78" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#455a64">muito fina e gelatinosa</text>
+  <g stroke="#263238" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="110" y="150" width="292" height="190" rx="22" fill="none"/><path d="M135 190 C170 175 205 205 240 190 C280 175 315 205 360 190" stroke-width="4"/><path d="M135 208 C170 193 205 223 240 208 C280 193 315 223 360 208" stroke-width="4"/><path d="M135 226 C170 211 205 241 240 226 C280 211 315 241 360 226" stroke-width="4"/><path d="M135 244 C170 229 205 259 240 244 C280 229 315 259 360 244" stroke-width="4"/><path d="M135 262 C170 247 205 277 240 262 C280 247 315 277 360 262" stroke-width="4"/><path d="M135 280 C170 265 205 295 240 280 C280 265 315 295 360 280" stroke-width="4"/><path d="M135 298 C170 283 205 313 240 298 C280 283 315 313 360 298" stroke-width="4"/></g>
+  <rect x="176" y="422" width="160" height="54" rx="16" fill="#f5f5f5" stroke="#263238" stroke-width="3"/>
+  <text x="256" y="459" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#263238">0 pts</text>
+  <text x="256" y="496" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#607d8b">Capurro</text>
+</svg>

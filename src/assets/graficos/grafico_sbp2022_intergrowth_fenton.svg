@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="320" viewBox="0 0 520 320" role="img" aria-label="Gráfico de classificação do peso ao nascer por idade gestacional conforme SBP 2022">
+<rect x="8" y="8" width="504" height="304" rx="24" fill="#fffaf7" stroke="#3f3a3a" stroke-width="3"/>
+<text x="260" y="38" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700">Peso ao nascer × idade gestacional</text>
+<line x1="72" y1="250" x2="470" y2="250" stroke="#2f2a2a" stroke-width="3"/><line x1="72" y1="250" x2="72" y2="62" stroke="#2f2a2a" stroke-width="3"/>
+<path d="M82 224 C160 208,235 188,314 150 C390 110,435 88,462 78" fill="none" stroke="#2f2a2a" stroke-width="3"/>
+<path d="M82 186 C160 170,235 144,314 108 C390 74,435 58,462 52" fill="none" stroke="#2f2a2a" stroke-width="3" stroke-dasharray="7 7"/>
+<path d="M82 242 C160 230,235 212,314 178 C390 142,435 120,462 108" fill="none" stroke="#2f2a2a" stroke-width="3" stroke-dasharray="7 7"/>
+<circle cx="305" cy="154" r="9" fill="#111827"/>
+<text x="88" y="70" font-family="Arial" font-size="13">P90</text><text x="88" y="195" font-family="Arial" font-size="13">P50</text><text x="88" y="238" font-family="Arial" font-size="13">P10</text>
+<text x="260" y="288" text-anchor="middle" font-family="Arial" font-size="14">INTERGROWTH 33–42 sem • Fenton &amp; Kim &lt;33 sem</text>
+</svg>

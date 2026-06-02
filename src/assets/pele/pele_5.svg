@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Textura da pele - fina e lisa - 5 pontos">
+  <rect x="8" y="8" width="496" height="496" rx="28" fill="#ffffff" stroke="#263238" stroke-width="4"/>
+  <text x="256" y="46" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#263238">Textura da pele</text>
+  <text x="256" y="78" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#455a64">fina e lisa</text>
+  <g stroke="#263238" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="110" y="150" width="292" height="190" rx="22" fill="none"/><path d="M150 245 H360" stroke-width="3" opacity="0.45"/></g>
+  <rect x="176" y="422" width="160" height="54" rx="16" fill="#f5f5f5" stroke="#263238" stroke-width="3"/>
+  <text x="256" y="459" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#263238">5 pts</text>
+  <text x="256" y="496" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#607d8b">Capurro</text>
+</svg>

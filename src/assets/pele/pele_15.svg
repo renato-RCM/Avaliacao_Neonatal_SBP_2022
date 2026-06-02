@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Textura da pele - grossa; rugas superficiais - 15 pontos">
+  <rect x="8" y="8" width="496" height="496" rx="28" fill="#ffffff" stroke="#263238" stroke-width="4"/>
+  <text x="256" y="46" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#263238">Textura da pele</text>
+  <text x="256" y="78" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#455a64">grossa; rugas superficiais</text>
+  <g stroke="#263238" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="110" y="150" width="292" height="190" rx="22" fill="none"/><path d="M135 185 C190 168 245 202 370 180" stroke-width="4"/><path d="M135 215 C190 196 245 232 370 206" stroke-width="4"/><path d="M135 245 C190 224 245 262 370 232" stroke-width="4"/><path d="M135 275 C190 252 245 292 370 258" stroke-width="4"/><path d="M135 305 C190 280 245 322 370 284" stroke-width="4"/><path d="M190 160 L180 210 M320 295 L355 330"/></g>
+  <rect x="176" y="422" width="160" height="54" rx="16" fill="#f5f5f5" stroke="#263238" stroke-width="3"/>
+  <text x="256" y="459" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#263238">15 pts</text>
+  <text x="256" y="496" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#607d8b">Capurro</text>
+</svg>

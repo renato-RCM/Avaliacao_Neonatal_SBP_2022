@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260" role="img" aria-label="Apgar - Tônus 0 ponto - Flacidez total">
+  <rect x="8" y="8" width="344" height="244" rx="24" fill="#fffaf7" stroke="#3f3a3a" stroke-width="3"/>
+  <rect x="8" y="8" width="344" height="58" rx="24" fill="#f1e7df"/>
+  <text x="180" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2f2a2a">Apgar - Tônus 0 ponto</text>
+  <g transform="translate(70,78)"><circle cx="110" cy="38" r="22" fill="#ffe8d6" stroke="#2f2a2a" stroke-width="5"/><path d="M110 60 C108 92,108 116,110 138" stroke="#2f2a2a" stroke-width="8" fill="none"/><path d="M108 82 C78 105,58 120,38 132" stroke="#2f2a2a" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M114 82 C145 105,165 120,186 132" stroke="#2f2a2a" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M108 136 C88 154,68 158,48 154" stroke="#2f2a2a" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M114 136 C135 154,155 158,176 154" stroke="#2f2a2a" stroke-width="7" fill="none" stroke-linecap="round"/></g>
+  <text x="180" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2f2a2a">Flacidez total</text>
+</svg>

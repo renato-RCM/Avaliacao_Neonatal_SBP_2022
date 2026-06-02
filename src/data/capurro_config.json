@@ -1,0 +1,377 @@
+{
+  "version": "2.0.0-sbp2022",
+  "units": {
+    "gestational_age": "days",
+    "birth_weight": "grams"
+  },
+  "methods": {
+    "capurro_somatico": {
+      "label": "Capurro Somático",
+      "constant_days": 204,
+      "formula_days": "sum_points + 204",
+      "formula_weeks_decimal": "(sum_points + 204) / 7",
+      "items": [
+        "orelha",
+        "glandula_mamaria",
+        "mamilo",
+        "pele",
+        "pregas_plantares"
+      ]
+    },
+    "capurro_somatoneurologico": {
+      "label": "Capurro Somático-Neurológico",
+      "constant_days": 200,
+      "formula_days": "sum_points + 200",
+      "formula_weeks_decimal": "(sum_points + 200) / 7",
+      "items": [
+        "orelha",
+        "glandula_mamaria",
+        "pele",
+        "pregas_plantares",
+        "xale",
+        "cabeca"
+      ]
+    }
+  },
+  "items": {
+    "orelha": {
+      "label": "Forma da orelha / pavilhão auricular",
+      "options": [
+        {
+          "score": 0,
+          "label": "Chata, disforme, pavilhão não encurvado",
+          "asset": "assets/orelha/orelha_0.svg"
+        },
+        {
+          "score": 8,
+          "label": "Pavilhão parcialmente encurvado no bordo superior",
+          "asset": "assets/orelha/orelha_8.svg"
+        },
+        {
+          "score": 16,
+          "label": "Pavilhão encurvado em toda a borda superior",
+          "asset": "assets/orelha/orelha_16.svg"
+        },
+        {
+          "score": 24,
+          "label": "Pavilhão totalmente encurvado",
+          "asset": "assets/orelha/orelha_24.svg"
+        }
+      ]
+    },
+    "glandula_mamaria": {
+      "label": "Tamanho da glândula mamária",
+      "options": [
+        {
+          "score": 0,
+          "label": "Não palpável",
+          "asset": "assets/glandula_mamaria/glandula_0.svg"
+        },
+        {
+          "score": 5,
+          "label": "Palpável, diâmetro menor que 5 mm",
+          "asset": "assets/glandula_mamaria/glandula_5.svg"
+        },
+        {
+          "score": 10,
+          "label": "Palpável, diâmetro entre 5 e 10 mm",
+          "asset": "assets/glandula_mamaria/glandula_10.svg"
+        },
+        {
+          "score": 15,
+          "label": "Palpável, diâmetro maior que 10 mm",
+          "asset": "assets/glandula_mamaria/glandula_15.svg"
+        }
+      ]
+    },
+    "mamilo": {
+      "label": "Formação do mamilo",
+      "options": [
+        {
+          "score": 0,
+          "label": "Apenas visível, sem aréola",
+          "asset": "assets/mamilo/mamilo_0.svg"
+        },
+        {
+          "score": 5,
+          "label": "Mamilo nítido, aréola lisa, diâmetro menor que 7,5 mm",
+          "asset": "assets/mamilo/mamilo_5.svg"
+        },
+        {
+          "score": 10,
+          "label": "Mamilo puntiforme, aréola maior que 7,5 mm, borda não elevada",
+          "asset": "assets/mamilo/mamilo_10.svg"
+        },
+        {
+          "score": 15,
+          "label": "Mamilo puntiforme, aréola maior que 7,5 mm, borda elevada",
+          "asset": "assets/mamilo/mamilo_15.svg"
+        }
+      ]
+    },
+    "pele": {
+      "label": "Textura da pele",
+      "options": [
+        {
+          "score": 0,
+          "label": "Muito fina e gelatinosa",
+          "asset": "assets/pele/pele_0.svg"
+        },
+        {
+          "score": 5,
+          "label": "Fina e lisa",
+          "asset": "assets/pele/pele_5.svg"
+        },
+        {
+          "score": 10,
+          "label": "Algo mais grossa, com discreta descamação superficial",
+          "asset": "assets/pele/pele_10.svg"
+        },
+        {
+          "score": 15,
+          "label": "Grossa, com rugas superficiais e descamação em mãos e pés",
+          "asset": "assets/pele/pele_15.svg"
+        },
+        {
+          "score": 20,
+          "label": "Grossa, apergaminhada/enrugada, com marcas profundas",
+          "asset": "assets/pele/pele_20.svg"
+        }
+      ]
+    },
+    "pregas_plantares": {
+      "label": "Pregas plantares / sulcos plantares",
+      "options": [
+        {
+          "score": 0,
+          "label": "Sem pregas",
+          "asset": "assets/pregas_plantares/pregas_0.svg"
+        },
+        {
+          "score": 5,
+          "label": "Marcas mal definidas na metade anterior da planta",
+          "asset": "assets/pregas_plantares/pregas_5.svg"
+        },
+        {
+          "score": 10,
+          "label": "Marcas bem definidas na metade anterior e sulcos no terço anterior",
+          "asset": "assets/pregas_plantares/pregas_10.svg"
+        },
+        {
+          "score": 15,
+          "label": "Sulcos na metade anterior da planta",
+          "asset": "assets/pregas_plantares/pregas_15.svg"
+        },
+        {
+          "score": 20,
+          "label": "Sulcos em mais da metade anterior da planta",
+          "asset": "assets/pregas_plantares/pregas_20.svg"
+        }
+      ]
+    },
+    "xale": {
+      "label": "Sinal do xale",
+      "options": [
+        {
+          "score": 0,
+          "label": "Cotovelo alcança a linha axilar anterior do lado oposto",
+          "asset": "assets/xale/xale_0.svg"
+        },
+        {
+          "score": 6,
+          "label": "Cotovelo entre a linha axilar anterior do lado oposto e a linha média",
+          "asset": "assets/xale/xale_6.svg"
+        },
+        {
+          "score": 12,
+          "label": "Cotovelo ao nível da linha média",
+          "asset": "assets/xale/xale_12.svg"
+        },
+        {
+          "score": 16,
+          "label": "Cotovelo entre a linha média e a linha axilar anterior do mesmo lado",
+          "asset": "assets/xale/xale_16.svg",
+          "note": "Algumas referências/calculadoras usam 18; manter configurável por protocolo institucional."
+        }
+      ]
+    },
+    "cabeca": {
+      "label": "Posição da cabeça ao levantar o RN",
+      "options": [
+        {
+          "score": 0,
+          "label": "Cabeça totalmente deflexionada, ângulo cérvico-torácico aproximado de 270°",
+          "asset": "assets/cabeca/cabeca_0.svg"
+        },
+        {
+          "score": 4,
+          "label": "Ângulo cérvico-torácico entre 180° e 270°",
+          "asset": "assets/cabeca/cabeca_4.svg"
+        },
+        {
+          "score": 8,
+          "label": "Ângulo cérvico-torácico igual a 180°",
+          "asset": "assets/cabeca/cabeca_8.svg"
+        },
+        {
+          "score": 12,
+          "label": "Ângulo cérvico-torácico menor que 180°",
+          "asset": "assets/cabeca/cabeca_12.svg"
+        }
+      ]
+    }
+  },
+  "modules": [
+    "apgar",
+    "capurro",
+    "birthweight_gestational_age_classification"
+  ],
+  "clinical_guideline": "SBP 2022: Reanimação Neonatal + Documento Científico PIG 22/12/2022",
+  "apgar": {
+    "label": "Boletim de Apgar ampliado",
+    "minutes": [
+      1,
+      5,
+      10,
+      15,
+      20
+    ],
+    "default_minutes": [
+      1,
+      5
+    ],
+    "repeat_rule": "Se Apgar < 7 no 5º minuto, repetir a cada 5 minutos até 20 minutos de vida.",
+    "important_note": "O Apgar não deve ser usado para indicar procedimentos de reanimação neonatal; deve documentar condição clínica e resposta retrospectiva às manobras.",
+    "items": {
+      "frequencia_cardiaca": {
+        "label": "Frequência cardíaca",
+        "options": [
+          {
+            "score": 0,
+            "label": "Ausente",
+            "asset": "assets/apgar/frequencia_cardiaca_0.svg"
+          },
+          {
+            "score": 1,
+            "label": "< 100 bpm",
+            "asset": "assets/apgar/frequencia_cardiaca_1.svg"
+          },
+          {
+            "score": 2,
+            "label": "> 100 bpm",
+            "asset": "assets/apgar/frequencia_cardiaca_2.svg"
+          }
+        ]
+      },
+      "respiracao": {
+        "label": "Respiração",
+        "options": [
+          {
+            "score": 0,
+            "label": "Ausente",
+            "asset": "assets/apgar/respiracao_0.svg"
+          },
+          {
+            "score": 1,
+            "label": "Irregular",
+            "asset": "assets/apgar/respiracao_1.svg"
+          },
+          {
+            "score": 2,
+            "label": "Regular / choro forte",
+            "asset": "assets/apgar/respiracao_2.svg"
+          }
+        ]
+      },
+      "tonus_muscular": {
+        "label": "Tônus muscular",
+        "options": [
+          {
+            "score": 0,
+            "label": "Flacidez total",
+            "asset": "assets/apgar/tonus_0.svg"
+          },
+          {
+            "score": 1,
+            "label": "Alguma flexão",
+            "asset": "assets/apgar/tonus_1.svg"
+          },
+          {
+            "score": 2,
+            "label": "Movimentos ativos",
+            "asset": "assets/apgar/tonus_2.svg"
+          }
+        ]
+      },
+      "irritabilidade_reflexa": {
+        "label": "Irritabilidade reflexa / resposta ao estímulo tátil",
+        "options": [
+          {
+            "score": 0,
+            "label": "Sem resposta",
+            "asset": "assets/apgar/reflexo_0.svg"
+          },
+          {
+            "score": 1,
+            "label": "Careta",
+            "asset": "assets/apgar/reflexo_1.svg"
+          },
+          {
+            "score": 2,
+            "label": "Choro ou movimento de retirada",
+            "asset": "assets/apgar/reflexo_2.svg"
+          }
+        ]
+      },
+      "cor": {
+        "label": "Cor",
+        "options": [
+          {
+            "score": 0,
+            "label": "Cianose / palidez",
+            "asset": "assets/apgar/cor_0.svg"
+          },
+          {
+            "score": 1,
+            "label": "Corpo róseo com extremidades cianóticas",
+            "asset": "assets/apgar/cor_1.svg"
+          },
+          {
+            "score": 2,
+            "label": "Corpo e extremidades róseos",
+            "asset": "assets/apgar/cor_2.svg"
+          }
+        ]
+      }
+    },
+    "resuscitation_interventions_to_document": [
+      "O2 suplementar",
+      "VPP com máscara",
+      "VPP com cânula",
+      "CPAP nasal",
+      "Massagem cardíaca",
+      "Adrenalina/Expansor"
+    ]
+  },
+  "growth_classification_sbp2022": {
+    "label": "Classificação peso ao nascer × idade gestacional conforme SBP 2022",
+    "classification": {
+      "PIG": "peso < P10 para idade gestacional e sexo",
+      "AIG": "peso entre P10 e P90 para idade gestacional e sexo",
+      "GIG": "peso > P90 para idade gestacional e sexo"
+    },
+    "reference_selection": [
+      {
+        "ga_range": "33+0 a 42+6",
+        "source": "INTERGROWTH-21st Newborn Size Standards",
+        "use": "classificar tamanho ao nascimento por sexo e idade gestacional"
+      },
+      {
+        "ga_range": "< 33+0",
+        "source": "Fenton & Kim 2013",
+        "use": "classificar prematuros abaixo de 33 semanas"
+      }
+    ],
+    "warning": "A SBP 2022 informa que curvas de crescimento intrauterino/fetal não são boa opção para avaliar tamanho ao nascimento; usar referências de tamanho ao nascimento conforme faixa de idade gestacional."
+  }
+}
