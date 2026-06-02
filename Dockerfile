@@ -44,11 +44,11 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copia somente os artefatos estáticos da SPA
 COPY --from=build /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 6689
 
 # Healthcheck: nginx responde ao endpoint estático /index.html
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD wget -q -O- http://127.0.0.1/ >/dev/null || exit 1
+  CMD wget -q -O- http://127.0.0.1:6689/ >/dev/null || exit 1
 
 # nginx ja roda no foreground com o entrypoint padrao da imagem oficial.
 CMD ["nginx", "-g", "daemon off;"]

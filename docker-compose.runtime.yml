@@ -1,0 +1,52 @@
+version: "3.7"
+
+services:
+## ----------------------- AVALIACAO NEONATAL ---------------------- ##
+
+  avaliacao-neonatal:
+    image: renatorcm/avaliacao-neonatal-sbp2022:v1.0.1  ## << TROQUE A VERSAO AQUI ao atualizar
+
+    networks:
+      - RcmNet ## Nome da rede interna
+
+    environment:
+      ## Timezone
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+      - TZ=America/Sao_Paulo
+
+      ## Servidor (nginx escuta nesta porta dentro do container)
+      - PORT=6689                                              ## Porta interna do container
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 256M
+        reservations:
+          cpus: "0.10"
+          memory: 64M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.avaliacao-neonatal.rule=Host(`AvaliacaoNeonatal.iamultagentes.com.br`) ## URL do Frontend
+        - traefik.http.routers.avaliacao-neonatal.entrypoints=websecure
+        - traefik.http.routers.avaliacao-neonatal.priority=1
+        - traefik.http.routers.avaliacao-neonatal.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.avaliacao-neonatal.service=avaliacao-neonatal
+        - traefik.http.services.avaliacao-neonatal.loadbalancer.server.port=6689
+        - traefik.http.services.avaliacao-neonatal.loadbalancer.passHostHeader=1
+
+## ----------------------- AVALIACAO NEONATAL ---------------------- ##
+
+networks:
+  RcmNet: ## Nome da rede interna
+    external: true
+    name: RcmNet ## Nome da rede interna

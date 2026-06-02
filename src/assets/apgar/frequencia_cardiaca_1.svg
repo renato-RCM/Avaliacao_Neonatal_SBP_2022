@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260" role="img" aria-label="Apgar - FC 1 ponto - < 100 bpm">
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260" role="img" aria-label="Apgar - FC 1 ponto - menor que 100 bpm">
   <rect x="8" y="8" width="344" height="244" rx="24" fill="#fffaf7" stroke="#3f3a3a" stroke-width="3"/>
   <rect x="8" y="8" width="344" height="58" rx="24" fill="#f1e7df"/>
   <text x="180" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2f2a2a">Apgar - FC 1 ponto</text>
   <g transform="translate(70,78)"><path d="M110 55 C100 35,70 35,70 62 C70 88,110 112,110 112 C110 112,150 88,150 62 C150 35,120 35,110 55 Z" fill="#fde2e2" stroke="#2f2a2a" stroke-width="5"/><polyline points="35,95 65,95 78,80 94,110 112,65 132,95 185,95" fill="none" stroke="#2f2a2a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
-  <text x="180" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2f2a2a">< 100 bpm</text>
+  <text x="180" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2f2a2a">&lt; 100 bpm</text>
 </svg>
