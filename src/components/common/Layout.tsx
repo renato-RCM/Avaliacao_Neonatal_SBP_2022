@@ -61,6 +61,14 @@ export function Layout({ children, showPrint = false }: LayoutProps) {
             protocolo institucional. O Apgar não decide reanimação — segue avaliação imediata e
             diretrizes SBP 2022.
           </p>
+          <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-slate-400 sm:text-[11px]">
+            <span className="rounded bg-slate-100 px-1.5 py-0.5 font-mono font-semibold text-slate-600">
+              v{__APP_VERSION__}
+            </span>
+            <span>build {__APP_BUILD_DATE__}</span>
+            <span className="hidden sm:inline">·</span>
+            <span>Avaliação Neonatal SBP 2022</span>
+          </p>
         </div>
       </footer>
     </div>
