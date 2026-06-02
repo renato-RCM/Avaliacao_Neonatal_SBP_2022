@@ -3,8 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { Copy, Printer, RotateCcw, FileText } from 'lucide-react';
 import { Layout } from '@/components/common/Layout';
 import { Alert } from '@/components/common/Alert';
+import { RequireMode, useEvaluationMode } from '@/hooks/useEvaluationMode';
 import { useEvaluationStore } from '@/store/useEvaluationStore';
 import { capurroConfig } from '@/data/config';
+import {
+  getRelatorioBack,
+  getRelatorioTitle,
+  MODE_LABELS,
+  showsApgarInReport,
+  showsCapurroInReport,
+  showsGrowthInReport,
+} from '@/utils/evaluationFlow';
+import type { EvaluationMode } from '@/types/domain';
 import { calcularCapurro } from '@/services/capurroCalculator';
 import { calcularApgarMinuto, isApgarMinutoCompleto } from '@/services/apgarCalculator';
 import { classificarPesoPorIdadeGestacional } from '@/services/growthClassifier';
@@ -13,8 +23,9 @@ import type { ApgarMinute } from '@/types/domain';
 
 const MINUTOS: ApgarMinute[] = [1, 5, 10, 15, 20];
 
-export default function Relatorio() {
+function RelatorioPage() {
   const navigate = useNavigate();
+  const modo = useEvaluationMode();
   const rn = useEvaluationStore((s) => s.rn);
   const apgar = useEvaluationStore((s) => s.apgar);
   const capurroState = useEvaluationStore((s) => s.capurro);
@@ -63,12 +74,10 @@ export default function Relatorio() {
     apgar5min: apgar5,
   });
 
-  const texto = useMemo(() => buildReportText({ rn, apgarResultados, capurro, growth }), [
-    rn,
-    apgarResultados,
-    capurro,
-    growth,
-  ]);
+  const texto = useMemo(
+    () => buildReportText({ modo, rn, apgarResultados, capurro, growth }),
+    [modo, rn, apgarResultados, capurro, growth],
+  );
 
   async function handleCopy() {
     try {
@@ -100,10 +109,11 @@ export default function Relatorio() {
             <FileText className="h-4 w-4" aria-hidden /> Relatório final
           </p>
           <h1 className="mt-1 text-2xl font-bold text-slate-900 sm:text-3xl">
-            Avaliação neonatal
+            {getRelatorioTitle(modo)}
           </h1>
           <p className="mt-1 text-sm text-slate-600">
-            Documento de apoio clínico — SBP 2022. Não substitui prontuário oficial.
+            {MODE_LABELS[modo]} — documento de apoio clínico SBP 2022. Não substitui prontuário
+            oficial.
           </p>
         </div>
       </div>
@@ -135,13 +145,16 @@ export default function Relatorio() {
           </p>
         </header>
 
-        <section className="mb-5">
-          <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-slate-700">
-            Boletim de Apgar ampliado
-          </h2>
-          <ApgarTabela resultados={apgarResultados} apgar={apgar} />
-        </section>
+        {showsApgarInReport(modo) && (
+          <section className="mb-5">
+            <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-slate-700">
+              Boletim de Apgar ampliado
+            </h2>
+            <ApgarTabela resultados={apgarResultados} apgar={apgar} />
+          </section>
+        )}
 
+        {showsCapurroInReport(modo) && (
         <section className="mb-5">
           <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-slate-700">
             Idade gestacional (Capurro)
@@ -162,7 +175,9 @@ export default function Relatorio() {
             <p className="text-sm text-slate-500">Capurro não calculado.</p>
           )}
         </section>
+        )}
 
+        {showsGrowthInReport(modo) && (
         <section className="mb-5">
           <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-slate-700">
             Peso × Idade gestacional
@@ -181,6 +196,7 @@ export default function Relatorio() {
             <p className="text-sm text-slate-500">{growth?.message ?? 'Não classificado.'}</p>
           )}
         </section>
+        )}
 
         {alerts.length > 0 && (
           <section className="mb-5">
@@ -212,7 +228,7 @@ export default function Relatorio() {
       </article>
 
       <div className="mt-5 grid gap-3 sm:grid-cols-2 no-print">
-        <button onClick={() => navigate('/resultado/peso')} className="btn-secondary">
+        <button onClick={() => navigate(getRelatorioBack(modo))} className="btn-secondary">
           Voltar
         </button>
         <button onClick={handleNova} className="btn-primary">
@@ -278,19 +294,30 @@ function ApgarTabela({
   );
 }
 
+export default function Relatorio() {
+  return (
+    <RequireMode>
+      <RelatorioPage />
+    </RequireMode>
+  );
+}
+
 function buildReportText({
+  modo,
   rn,
   apgarResultados,
   capurro,
   growth,
 }: {
+  modo: EvaluationMode;
   rn: ReturnType<typeof useEvaluationStore.getState>['rn'];
   apgarResultados: (ReturnType<typeof calcularApgarMinuto> | null)[];
   capurro: ReturnType<typeof calcularCapurro> | null;
   growth: ReturnType<typeof classificarPesoPorIdadeGestacional> | null;
 }): string {
   const linhas: string[] = [];
-  linhas.push('Resultado da avaliação neonatal — SBP 2022');
+  linhas.push(`${getRelatorioTitle(modo)} — SBP 2022`);
+  linhas.push(`Módulo: ${MODE_LABELS[modo]}`);
   linhas.push('');
   linhas.push(`Identificação: ${rn.identificacao || 'RN (anônimo)'}`);
   linhas.push(
@@ -302,14 +329,16 @@ function buildReportText({
   if (rn.avaliador) linhas.push(`Avaliador: ${rn.avaliador}`);
   linhas.push('');
 
-  linhas.push('Boletim de Apgar ampliado:');
-  MINUTOS.forEach((m, idx) => {
-    const r = apgarResultados[idx];
-    linhas.push(`  ${m}º min: ${r ? r.total : 'não registrado'}`);
-  });
-  linhas.push('');
+  if (showsApgarInReport(modo)) {
+    linhas.push('Boletim de Apgar ampliado:');
+    MINUTOS.forEach((m, idx) => {
+      const r = apgarResultados[idx];
+      linhas.push(`  ${m}º min: ${r ? r.total : 'não registrado'}`);
+    });
+    linhas.push('');
+  }
 
-  if (capurro) {
+  if (showsCapurroInReport(modo) && capurro) {
     linhas.push(`Método: ${capurroConfig.methods[capurro.metodo].label}`);
     linhas.push(`Pontuação total: ${capurro.somaPontos} pontos`);
     linhas.push(
@@ -320,15 +349,26 @@ function buildReportText({
     linhas.push('');
   }
 
-  if (growth && growth.status === 'ok') {
+  if (showsGrowthInReport(modo) && growth && growth.status === 'ok') {
     linhas.push(`Curva utilizada: ${growth.referencia}`);
     linhas.push(`Classificação peso/IG: ${growth.classificacao}`);
     linhas.push(`Percentil estimado: ${growth.percentilEstimado}`);
     linhas.push('');
   }
 
-  linhas.push(
-    'Observação: O método de Capurro é uma estimativa clínica e deve ser correlacionado com DUM, ultrassonografia precoce, avaliação neonatal e protocolo institucional.',
-  );
+  if (modo === 'apgar') {
+    linhas.push(
+      'Observação: O Apgar não decide reanimação — segue avaliação imediata e diretrizes SBP 2022.',
+    );
+  } else {
+    linhas.push(
+      'Observação: O método de Capurro é uma estimativa clínica e deve ser correlacionado com DUM, ultrassonografia precoce, avaliação neonatal e protocolo institucional.',
+    );
+    if (modo === 'completa') {
+      linhas.push(
+        'O Apgar não decide reanimação — segue avaliação imediata e diretrizes SBP 2022.',
+      );
+    }
+  }
   return linhas.join('\n');
 }

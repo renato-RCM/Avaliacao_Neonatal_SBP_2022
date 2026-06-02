@@ -5,7 +5,14 @@ import { StepNav } from '@/components/common/StepNav';
 import { Alert } from '@/components/common/Alert';
 import { SectionCard } from '@/components/common/SectionCard';
 import { OptionCard } from '@/components/common/OptionCard';
+import { RequireModes, useEvaluationMode } from '@/hooks/useEvaluationMode';
 import { useEvaluationStore } from '@/store/useEvaluationStore';
+import {
+  getCapurroParametrosBack,
+  getCapurroParametrosNext,
+  getStepNumber,
+  getTotalSteps,
+} from '@/utils/evaluationFlow';
 import { capurroConfig } from '@/data/config';
 import type { CapurroItemKey } from '@/types/domain';
 
@@ -26,7 +33,8 @@ const ITEM_GUIDANCE: Record<CapurroItemKey, string> = {
     'Avalie o controle/tônus cervical ao levantar suavemente o RN, observando o ângulo entre cabeça e tronco.',
 };
 
-export default function CapurroParametros() {
+function CapurroParametrosPage() {
+  const modo = useEvaluationMode();
   const metodo = useEvaluationStore((s) => s.capurro.metodo);
   const respostas = useEvaluationStore((s) => s.capurro.respostas);
   const setResposta = useEvaluationStore((s) => s.setCapurroResposta);
@@ -49,12 +57,12 @@ export default function CapurroParametros() {
   return (
     <Layout>
       <StepNav
-        step={4}
-        totalSteps={6}
+        step={getStepNumber('capurro_parametros', modo)}
+        totalSteps={getTotalSteps(modo)}
         title={metodoCfg.label}
         subtitle="Selecione uma opção em cada parâmetro. A pontuação aparece em tempo real."
-        backTo="/capurro/metodo"
-        nextTo="/resultado/capurro"
+        backTo={getCapurroParametrosBack()}
+        nextTo={getCapurroParametrosNext()}
         nextDisabled={!completo}
       />
 
@@ -110,6 +118,14 @@ export default function CapurroParametros() {
         )}
       </div>
     </Layout>
+  );
+}
+
+export default function CapurroParametros() {
+  return (
+    <RequireModes allowed={['completa', 'capurro_peso']}>
+      <CapurroParametrosPage />
+    </RequireModes>
   );
 }
 

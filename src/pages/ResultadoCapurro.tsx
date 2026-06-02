@@ -5,12 +5,20 @@ import { Layout } from '@/components/common/Layout';
 import { StepNav } from '@/components/common/StepNav';
 import { Alert } from '@/components/common/Alert';
 import { SectionCard } from '@/components/common/SectionCard';
+import { RequireModes, useEvaluationMode } from '@/hooks/useEvaluationMode';
 import { useEvaluationStore } from '@/store/useEvaluationStore';
+import {
+  getResultadoCapurroBack,
+  getResultadoCapurroNext,
+  getStepNumber,
+  getTotalSteps,
+} from '@/utils/evaluationFlow';
 import { capurroConfig } from '@/data/config';
 import { calcularCapurro } from '@/services/capurroCalculator';
 import { buildClinicalAlerts } from '@/services/clinicalAlerts';
 
-export default function ResultadoCapurro() {
+function ResultadoCapurroPage() {
+  const modo = useEvaluationMode();
   const metodo = useEvaluationStore((s) => s.capurro.metodo);
   const respostas = useEvaluationStore((s) => s.capurro.respostas);
   const rn = useEvaluationStore((s) => s.rn);
@@ -40,12 +48,12 @@ export default function ResultadoCapurro() {
   return (
     <Layout>
       <StepNav
-        step={5}
-        totalSteps={6}
+        step={getStepNumber('resultado_capurro', modo)}
+        totalSteps={getTotalSteps(modo)}
         title="Resultado — Capurro"
         subtitle="Idade gestacional estimada e classificação por idade gestacional."
-        backTo="/capurro/parametros"
-        nextTo="/resultado/peso"
+        backTo={getResultadoCapurroBack()}
+        nextTo={getResultadoCapurroNext()}
       />
 
       <div className="space-y-4">
@@ -135,6 +143,14 @@ function BigStat({
         {value}
       </p>
     </div>
+  );
+}
+
+export default function ResultadoCapurro() {
+  return (
+    <RequireModes allowed={['completa', 'capurro_peso']}>
+      <ResultadoCapurroPage />
+    </RequireModes>
   );
 }
 

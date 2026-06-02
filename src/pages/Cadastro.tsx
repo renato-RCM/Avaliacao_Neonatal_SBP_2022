@@ -2,17 +2,26 @@ import { useMemo, useState } from 'react';
 import { Layout } from '@/components/common/Layout';
 import { StepNav } from '@/components/common/StepNav';
 import { Alert } from '@/components/common/Alert';
+import { RequireMode, useEvaluationMode } from '@/hooks/useEvaluationMode';
 import { useEvaluationStore } from '@/store/useEvaluationStore';
 import type { Sexo } from '@/types/domain';
+import {
+  getCadastroNext,
+  getStepNumber,
+  getTotalSteps,
+  MODE_LABELS,
+} from '@/utils/evaluationFlow';
 import {
   composeISODateTime,
   splitISODateTime,
   validateBirthDateTime,
 } from '@/utils/dateTime';
 
-export default function Cadastro() {
+function CadastroForm() {
+  const modo = useEvaluationMode();
   const rn = useEvaluationStore((s) => s.rn);
   const setRN = useEvaluationStore((s) => s.setRN);
+  const exigeSexoPeso = modo !== 'apgar';
 
   const partesIniciais = splitISODateTime(rn.dataHoraNascimento);
 
@@ -35,7 +44,9 @@ export default function Cadastro() {
     [dataNascimento, horaNascimento],
   );
 
-  const podeProsseguir = pesoOk && sexoOk && pesoStr !== '' && dateTimeValidation.ok;
+  const podeProsseguir = exigeSexoPeso
+    ? pesoOk && sexoOk && pesoStr !== '' && dateTimeValidation.ok
+    : dateTimeValidation.ok;
 
   function handleNext() {
     setSubmitted(true);
@@ -62,16 +73,24 @@ export default function Cadastro() {
   return (
     <Layout>
       <StepNav
-        step={1}
-        totalSteps={6}
+        step={getStepNumber('cadastro', modo)}
+        totalSteps={getTotalSteps(modo)}
         title="Dados iniciais do RN"
-        subtitle="Identificação anônima ou clínica do recém-nascido. Sexo e peso são obrigatórios para a classificação PIG/AIG/GIG."
+        subtitle={
+          exigeSexoPeso
+            ? 'Identificação do recém-nascido. Sexo e peso são obrigatórios para Capurro e classificação PIG/AIG/GIG.'
+            : 'Identificação do recém-nascido para o Boletim de Apgar. Sexo e peso são opcionais neste módulo.'
+        }
         backTo="/"
-        nextTo="/apgar"
+        nextTo={getCadastroNext(modo)}
         nextLabel="Continuar"
         nextDisabled={!podeProsseguir}
         onNext={handleNext}
       />
+
+      <p className="mb-4 rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+        Módulo: {MODE_LABELS[modo]}
+      </p>
 
       <div className="space-y-4">
         <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
@@ -94,7 +113,12 @@ export default function Cadastro() {
 
         <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
           <span className="label">
-            Sexo biológico ao nascimento <span className="text-danger-600">*</span>
+            Sexo biológico ao nascimento{' '}
+            {exigeSexoPeso ? (
+              <span className="text-danger-600">*</span>
+            ) : (
+              <span className="font-normal text-slate-400">(opcional)</span>
+            )}
           </span>
           <div className="grid grid-cols-2 gap-2">
             <button
@@ -118,7 +142,7 @@ export default function Cadastro() {
               Feminino
             </button>
           </div>
-          {submitted && !sexoOk && (
+          {submitted && exigeSexoPeso && !sexoOk && (
             <p className="mt-2 text-xs font-medium text-danger-700">
               Sexo é obrigatório para a classificação PIG/AIG/GIG.
             </p>
@@ -127,13 +151,18 @@ export default function Cadastro() {
 
         <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
           <label className="label" htmlFor="peso">
-            Peso ao nascer (gramas) <span className="text-danger-600">*</span>
+            Peso ao nascer (gramas){' '}
+            {exigeSexoPeso ? (
+              <span className="text-danger-600">*</span>
+            ) : (
+              <span className="font-normal text-slate-400">(opcional)</span>
+            )}
           </label>
           <input
             id="peso"
             type="number"
             inputMode="decimal"
-            className={`input ${submitted && (!pesoOk || !pesoStr) ? 'border-danger-500 focus:border-danger-600 focus:ring-danger-500/30' : ''}`}
+            className={`input ${submitted && exigeSexoPeso && (!pesoOk || !pesoStr) ? 'border-danger-500 focus:border-danger-600 focus:ring-danger-500/30' : submitted && !exigeSexoPeso && pesoStr && !pesoOk ? 'border-danger-500 focus:border-danger-600 focus:ring-danger-500/30' : ''}`}
             placeholder="Ex.: 3250"
             value={pesoStr}
             onChange={(e) => setPesoStr(e.target.value)}
@@ -146,7 +175,7 @@ export default function Cadastro() {
               Peso fora da faixa válida (300 a 7000 g).
             </p>
           )}
-          {submitted && !pesoStr && (
+          {submitted && exigeSexoPeso && !pesoStr && (
             <p className="mt-2 text-xs font-medium text-danger-700">Informe o peso ao nascer.</p>
           )}
         </div>
@@ -221,11 +250,34 @@ export default function Cadastro() {
           />
         </div>
 
-        <Alert severity="info" title="Próximos passos">
-          A próxima etapa é o <strong>Boletim de Apgar ampliado</strong> nos minutos 1 e 5. Se o
-          Apgar do 5º minuto for &lt; 7, os minutos 10, 15 e 20 serão habilitados conforme SBP 2022.
-        </Alert>
+        {modo === 'apgar' && (
+          <Alert severity="info" title="Próximos passos">
+            A próxima etapa é o <strong>Boletim de Apgar ampliado</strong> nos minutos 1 e 5. Se o
+            Apgar do 5º minuto for &lt; 7, os minutos 10, 15 e 20 serão habilitados conforme SBP
+            2022.
+          </Alert>
+        )}
+        {modo === 'capurro_peso' && (
+          <Alert severity="info" title="Próximos passos">
+            Em seguida você escolherá o <strong>método de Capurro</strong>, registrará os
+            parâmetros e verá a <strong>classificação PIG/AIG/GIG</strong> com gráfico.
+          </Alert>
+        )}
+        {modo === 'completa' && (
+          <Alert severity="info" title="Próximos passos">
+            Sequência: <strong>Apgar ampliado</strong> → <strong>Capurro</strong> →{' '}
+            <strong>peso × idade gestacional</strong> e relatório final.
+          </Alert>
+        )}
       </div>
     </Layout>
+  );
+}
+
+export default function Cadastro() {
+  return (
+    <RequireMode>
+      <CadastroForm />
+    </RequireMode>
   );
 }

@@ -1,70 +1,134 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Activity, Baby, BookOpen, ChevronRight, Heart, LineChart, RotateCcw } from 'lucide-react';
+import {
+  Activity,
+  Baby,
+  BookOpen,
+  ChevronRight,
+  ClipboardList,
+  Heart,
+  LineChart,
+  RotateCcw,
+} from 'lucide-react';
 import { Layout } from '@/components/common/Layout';
 import { useEvaluationStore } from '@/store/useEvaluationStore';
+import type { EvaluationMode } from '@/types/domain';
+import {
+  MODE_DESCRIPTIONS,
+  MODE_LABELS,
+  getEntryPath,
+} from '@/utils/evaluationFlow';
+
+const MODOS: {
+  modo: EvaluationMode;
+  icon: React.ReactNode;
+  accent: string;
+}[] = [
+  {
+    modo: 'completa',
+    icon: <ClipboardList className="h-6 w-6" aria-hidden />,
+    accent: 'from-clinical-600 to-clinical-800',
+  },
+  {
+    modo: 'apgar',
+    icon: <Heart className="h-6 w-6" aria-hidden />,
+    accent: 'from-rose-600 to-rose-800',
+  },
+  {
+    modo: 'capurro_peso',
+    icon: <LineChart className="h-6 w-6" aria-hidden />,
+    accent: 'from-emerald-600 to-emerald-800',
+  },
+];
 
 export default function Home() {
   const navigate = useNavigate();
-  const reset = useEvaluationStore((s) => s.reset);
+  const iniciarModo = useEvaluationStore((s) => s.iniciarModo);
+  const modoAtual = useEvaluationStore((s) => s.ui.modo);
   const rn = useEvaluationStore((s) => s.rn);
-  const temAvaliacaoEmAndamento = !!rn.sexo || !!rn.pesoGramas;
+  const temAvaliacaoEmAndamento = !!modoAtual;
 
-  function handleNova() {
-    reset();
-    navigate('/cadastro');
+  function handleIniciar(modo: EvaluationMode) {
+    iniciarModo(modo);
+    navigate(getEntryPath(modo));
   }
 
   return (
     <Layout>
       <section className="mx-auto max-w-2xl">
-        <div className="mb-6 rounded-2xl bg-gradient-to-br from-clinical-600 to-clinical-800 p-6 text-white shadow-card sm:p-8">
+        <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-6">
           <div className="mb-3 flex items-center gap-2">
-            <span className="grid h-10 w-10 place-items-center rounded-lg bg-white/15 backdrop-blur">
+            <span className="grid h-10 w-10 place-items-center rounded-lg bg-clinical-100 text-clinical-700">
               <Baby className="h-6 w-6" aria-hidden />
             </span>
-            <span className="text-xs font-semibold uppercase tracking-wider opacity-90">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               SBP 2022
             </span>
           </div>
-          <h1 className="text-2xl font-bold leading-tight sm:text-3xl">
-            Avaliação Neonatal<br className="sm:hidden" /> em sala de parto
+          <h1 className="text-2xl font-bold leading-tight text-slate-900 sm:text-3xl">
+            Avaliação neonatal em sala de parto
           </h1>
-          <p className="mt-2 text-sm text-white/90 sm:text-base">
-            Apgar ampliado, idade gestacional pelo método de Capurro e classificação PIG/AIG/GIG
-            conforme as Diretrizes 2022 da Sociedade Brasileira de Pediatria.
+          <p className="mt-2 text-sm leading-relaxed text-slate-600 sm:text-base">
+            Escolha o módulo que deseja utilizar. Cada opção funciona de forma independente,
+            conforme a necessidade clínica do momento.
           </p>
+        </div>
 
-          <div className="mt-5 flex flex-col gap-2 sm:flex-row">
-            <button onClick={handleNova} className="btn-primary !bg-white !text-clinical-700 hover:!bg-slate-100">
-              <Activity className="h-5 w-5" aria-hidden />
-              Iniciar nova avaliação
+        <div className="space-y-3">
+          {MODOS.map(({ modo, icon, accent }) => (
+            <button
+              key={modo}
+              type="button"
+              onClick={() => handleIniciar(modo)}
+              className="card-clickable group w-full !p-0 text-left overflow-hidden"
+            >
+              <div className={`bg-gradient-to-r ${accent} px-4 py-3 text-white sm:px-5`}>
+                <div className="flex items-center gap-3">
+                  <span className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-white/15 backdrop-blur">
+                    {icon}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-base font-bold sm:text-lg">{MODE_LABELS[modo]}</p>
+                    {modo === 'completa' && (
+                      <span className="mt-0.5 inline-block rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide">
+                        Recomendado
+                      </span>
+                    )}
+                  </div>
+                  <ChevronRight
+                    className="h-5 w-5 flex-shrink-0 opacity-80 transition-transform group-hover:translate-x-0.5"
+                    aria-hidden
+                  />
+                </div>
+              </div>
+              <div className="px-4 py-3 sm:px-5">
+                <p className="text-sm leading-snug text-slate-600">{MODE_DESCRIPTIONS[modo]}</p>
+                <p className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-clinical-700">
+                  <Activity className="h-3.5 w-3.5" aria-hidden />
+                  Iniciar este módulo
+                </p>
+              </div>
             </button>
-            {temAvaliacaoEmAndamento && (
-              <Link to="/cadastro" className="btn-secondary !bg-white/10 !text-white !border-white/30 hover:!bg-white/20">
-                <RotateCcw className="h-4 w-4" aria-hidden />
-                Continuar avaliação
-              </Link>
-            )}
-          </div>
+          ))}
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-3">
-          <FeatureCard
-            icon={<Heart className="h-5 w-5" />}
-            title="Apgar ampliado"
-            text="1, 5, 10, 15 e 20 min, com registro das manobras de reanimação."
-          />
-          <FeatureCard
-            icon={<Activity className="h-5 w-5" />}
-            title="Capurro"
-            text="Somático e Somático-Neurológico com pontuação visual."
-          />
-          <FeatureCard
-            icon={<LineChart className="h-5 w-5" />}
-            title="PIG/AIG/GIG"
-            text="INTERGROWTH-21st e Fenton & Kim conforme SBP 2022."
-          />
-        </div>
+        {temAvaliacaoEmAndamento && (
+          <div className="mt-4 rounded-xl border border-clinical-200 bg-clinical-50 p-4">
+            <p className="text-sm font-semibold text-clinical-900">
+              Avaliação em andamento
+            </p>
+            <p className="mt-0.5 text-xs text-clinical-800">
+              Modo: <strong>{MODE_LABELS[modoAtual!]}</strong>
+              {rn.identificacao ? ` · ${rn.identificacao}` : ''}
+            </p>
+            <Link
+              to={getEntryPath(modoAtual!)}
+              className="btn-secondary mt-3 !min-h-[44px] w-full sm:w-auto"
+            >
+              <RotateCcw className="h-4 w-4" aria-hidden />
+              Continuar de onde parou
+            </Link>
+          </div>
+        )}
 
         <div className="mt-6 rounded-xl border border-slate-200 bg-white p-4 text-xs leading-relaxed text-slate-600 sm:text-sm">
           <p className="mb-2 flex items-center gap-2 font-semibold text-slate-800">
@@ -80,20 +144,5 @@ export default function Home() {
         </div>
       </section>
     </Layout>
-  );
-}
-
-function FeatureCard({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
-  return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-card">
-      <div className="mb-2 flex items-center gap-2">
-        <span className="grid h-8 w-8 place-items-center rounded-lg bg-clinical-100 text-clinical-700">
-          {icon}
-        </span>
-        <ChevronRight className="ml-auto h-4 w-4 text-slate-400" aria-hidden />
-      </div>
-      <p className="text-sm font-bold text-slate-900">{title}</p>
-      <p className="mt-0.5 text-xs leading-snug text-slate-600">{text}</p>
-    </div>
   );
 }

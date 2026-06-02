@@ -4,14 +4,22 @@ import { Layout } from '@/components/common/Layout';
 import { StepNav } from '@/components/common/StepNav';
 import { Alert } from '@/components/common/Alert';
 import { SectionCard } from '@/components/common/SectionCard';
+import { RequireModes, useEvaluationMode } from '@/hooks/useEvaluationMode';
 import { useEvaluationStore } from '@/store/useEvaluationStore';
+import {
+  getResultadoPesoBack,
+  getResultadoPesoNext,
+  getStepNumber,
+  getTotalSteps,
+} from '@/utils/evaluationFlow';
 import { capurroConfig } from '@/data/config';
 import { calcularCapurro } from '@/services/capurroCalculator';
 import { classificarPesoPorIdadeGestacional } from '@/services/growthClassifier';
 import { buildClinicalAlerts } from '@/services/clinicalAlerts';
 import { GrowthChart } from '@/components/growth/GrowthChart';
 
-export default function ResultadoPeso() {
+function ResultadoPesoPage() {
+  const modo = useEvaluationMode();
   const metodo = useEvaluationStore((s) => s.capurro.metodo);
   const respostas = useEvaluationStore((s) => s.capurro.respostas);
   const rn = useEvaluationStore((s) => s.rn);
@@ -50,12 +58,12 @@ export default function ResultadoPeso() {
   return (
     <Layout>
       <StepNav
-        step={6}
-        totalSteps={6}
+        step={getStepNumber('resultado_peso', modo)}
+        totalSteps={getTotalSteps(modo)}
         title="Peso × idade gestacional"
         subtitle="Classificação PIG/AIG/GIG conforme SBP 2022."
-        backTo="/resultado/capurro"
-        nextTo="/relatorio"
+        backTo={getResultadoPesoBack(modo)}
+        nextTo={getResultadoPesoNext()}
         nextLabel="Ver relatório"
         isFinal
       />
@@ -130,6 +138,14 @@ function Stat({ label, value, highlight }: { label: string; value: string; highl
         {value}
       </p>
     </div>
+  );
+}
+
+export default function ResultadoPeso() {
+  return (
+    <RequireModes allowed={['completa', 'capurro_peso']}>
+      <ResultadoPesoPage />
+    </RequireModes>
   );
 }
 

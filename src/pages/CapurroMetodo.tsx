@@ -1,24 +1,32 @@
 import { Layout } from '@/components/common/Layout';
 import { StepNav } from '@/components/common/StepNav';
 import { Alert } from '@/components/common/Alert';
+import { RequireModes, useEvaluationMode } from '@/hooks/useEvaluationMode';
 import { useEvaluationStore } from '@/store/useEvaluationStore';
+import {
+  getCapurroMetodoBack,
+  getCapurroMetodoNext,
+  getStepNumber,
+  getTotalSteps,
+} from '@/utils/evaluationFlow';
 import { capurroConfig } from '@/data/config';
 import type { CapurroMethod } from '@/types/domain';
 import { Brain, Hand, Check } from 'lucide-react';
 
-export default function CapurroMetodo() {
+function CapurroMetodoPage() {
+  const modo = useEvaluationMode();
   const metodo = useEvaluationStore((s) => s.capurro.metodo);
   const setMetodo = useEvaluationStore((s) => s.setCapurroMetodo);
 
   return (
     <Layout>
       <StepNav
-        step={3}
-        totalSteps={6}
+        step={getStepNumber('capurro_metodo', modo)}
+        totalSteps={getTotalSteps(modo)}
         title="Método de Capurro"
         subtitle="Selecione o método para estimar a idade gestacional. A escolha define os parâmetros que serão avaliados na próxima tela."
-        backTo="/apgar"
-        nextTo="/capurro/parametros"
+        backTo={getCapurroMetodoBack(modo)}
+        nextTo={getCapurroMetodoNext()}
         nextDisabled={!metodo}
       />
 
@@ -49,6 +57,14 @@ export default function CapurroMetodo() {
         </Alert>
       </div>
     </Layout>
+  );
+}
+
+export default function CapurroMetodo() {
+  return (
+    <RequireModes allowed={['completa', 'capurro_peso']}>
+      <CapurroMetodoPage />
+    </RequireModes>
   );
 }
 

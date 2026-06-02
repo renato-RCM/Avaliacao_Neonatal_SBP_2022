@@ -7,6 +7,7 @@ import type {
   ApgarScore,
   CapurroItemKey,
   CapurroMethod,
+  EvaluationMode,
   RNData,
 } from '@/types/domain';
 
@@ -20,10 +21,12 @@ interface EvaluationState {
     respostas: Partial<Record<CapurroItemKey, number>>;
   };
   ui: {
+    modo?: EvaluationMode;
     iniciadoEm?: string;
     finalizado?: boolean;
   };
 
+  iniciarModo: (modo: EvaluationMode) => void;
   setRN: (data: Partial<RNData>) => void;
   setApgarItem: (minuto: ApgarMinute, item: ApgarItemKey, score: ApgarScore) => void;
   toggleApgarIntervencao: (minuto: ApgarMinute, intervencao: string) => void;
@@ -34,6 +37,7 @@ interface EvaluationState {
 
 const initialState: Omit<
   EvaluationState,
+  | 'iniciarModo'
   | 'setRN'
   | 'setApgarItem'
   | 'toggleApgarIntervencao'
@@ -51,6 +55,18 @@ export const useEvaluationStore = create<EvaluationState>()(
   persist(
     (set, get) => ({
       ...initialState,
+
+      iniciarModo: (modo) => {
+        try {
+          localStorage.removeItem('avaliacao-neonatal-sbp-2022');
+        } catch {
+          /* ignore */
+        }
+        set({
+          ...initialState,
+          ui: { modo, iniciadoEm: new Date().toISOString() },
+        });
+      },
 
       setRN: (data) =>
         set((state) => ({
@@ -128,7 +144,7 @@ export const useEvaluationStore = create<EvaluationState>()(
     }),
     {
       name: 'avaliacao-neonatal-sbp-2022',
-      version: 1,
+      version: 2,
     },
   ),
 );

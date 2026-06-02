@@ -4,7 +4,14 @@ import { StepNav } from '@/components/common/StepNav';
 import { Alert } from '@/components/common/Alert';
 import { SectionCard } from '@/components/common/SectionCard';
 import { OptionCard } from '@/components/common/OptionCard';
+import { RequireModes, useEvaluationMode } from '@/hooks/useEvaluationMode';
 import { useEvaluationStore } from '@/store/useEvaluationStore';
+import {
+  getApgarBack,
+  getApgarNext,
+  getStepNumber,
+  getTotalSteps,
+} from '@/utils/evaluationFlow';
 import { capurroConfig } from '@/data/config';
 import {
   APGAR_ITEM_KEYS,
@@ -16,7 +23,8 @@ import type { ApgarItemKey, ApgarMinute, ApgarScore } from '@/types/domain';
 const MINUTOS_BASE: ApgarMinute[] = [1, 5];
 const MINUTOS_CONDICIONAIS: ApgarMinute[] = [10, 15, 20];
 
-export default function Apgar() {
+function ApgarPage() {
+  const modo = useEvaluationMode();
   const apgar = useEvaluationStore((s) => s.apgar);
   const setApgarItem = useEvaluationStore((s) => s.setApgarItem);
   const toggleIntervencao = useEvaluationStore((s) => s.toggleApgarIntervencao);
@@ -41,14 +49,15 @@ export default function Apgar() {
   return (
     <Layout>
       <StepNav
-        step={2}
-        totalSteps={6}
+        step={getStepNumber('apgar', modo)}
+        totalSteps={getTotalSteps(modo)}
         title="Boletim de Apgar ampliado"
         subtitle="SBP 2022. Pontue cada sinal nos minutos 1 e 5. Se Apgar do 5º minuto for menor que 7, registre também 10, 15 e 20 minutos."
-        backTo="/cadastro"
-        nextTo="/capurro/metodo"
-        nextLabel="Continuar"
+        backTo={getApgarBack(modo)}
+        nextTo={getApgarNext(modo)}
+        nextLabel={modo === 'apgar' ? 'Ver relatório' : 'Continuar'}
         nextDisabled={!obrigatoriosOk}
+        isFinal={modo === 'apgar'}
       />
 
       <div className="space-y-4">
@@ -185,5 +194,13 @@ function MinutoApgar({
         )}
       </div>
     </SectionCard>
+  );
+}
+
+export default function Apgar() {
+  return (
+    <RequireModes allowed={['completa', 'apgar']}>
+      <ApgarPage />
+    </RequireModes>
   );
 }

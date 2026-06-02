@@ -1,5 +1,8 @@
 export type Sexo = 'M' | 'F';
 
+/** Modo de uso escolhido no menu principal. */
+export type EvaluationMode = 'completa' | 'apgar' | 'capurro_peso';
+
 export type CapurroMethod = 'capurro_somatico' | 'capurro_somatoneurologico';
 
 export type CapurroItemKey =
