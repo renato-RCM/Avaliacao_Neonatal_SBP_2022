@@ -87,7 +87,7 @@ function CapurroParametrosPage() {
               description={ITEM_GUIDANCE[itemKey]}
               badge={
                 valor !== undefined ? (
-                  <span className="badge bg-clinical-600 text-white">{valor} pontos</span>
+                  <span className="badge bg-violet-600 text-white shadow-sm">{valor} pontos</span>
                 ) : (
                   <span className="badge bg-violet-50 text-violet-600">Pendente</span>
                 )

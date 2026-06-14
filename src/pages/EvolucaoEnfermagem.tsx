@@ -631,32 +631,32 @@ function EvolucaoEnfermagemPage() {
           description="Avaliação dos reflexos primitivos do RN."
           badge={<span className="badge bg-sky-100 text-sky-700"><Brain className="h-3 w-3" /> Neuro</span>}
         >
-          <div className="flex items-center gap-3 mb-3">
+          <div className="flex gap-2 mb-3">
             <button
               type="button"
-              className={`card-clickable !py-2 px-4 text-sm font-semibold ${
+              className={`flex-1 rounded-xl border-2 px-4 py-3 text-sm font-semibold transition-all duration-200 ${
                 form.reflexosNeurologicosNormal && !form.reflexosNeurologicosDescricao
-                  ? 'card-selected text-clinical-800'
-                  : 'text-slate-700'
+                  ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-sm'
+                  : 'border-violet-100 bg-white text-slate-500 hover:border-violet-300'
               }`}
               onClick={() => {
                 update('reflexosNeurologicosNormal', true);
                 update('reflexosNeurologicosDescricao', undefined);
               }}
             >
-              <CheckCircle2 className="h-4 w-4" />
+              <CheckCircle2 className={`mr-1.5 inline h-4 w-4 ${form.reflexosNeurologicosNormal && !form.reflexosNeurologicosDescricao ? 'text-emerald-500' : 'text-slate-300'}`} />
               De acordo com a idade
             </button>
             <button
               type="button"
-              className={`card-clickable !py-2 px-4 text-sm font-semibold ${
+              className={`flex-1 rounded-xl border-2 px-4 py-3 text-sm font-semibold transition-all duration-200 ${
                 form.reflexosNeurologicosNormal === false && form.reflexosNeurologicosDescricao
-                  ? 'card-selected text-warning-700 border-warning-600 ring-warning-600/30 bg-warning-50'
-                  : 'text-slate-700'
+                  ? 'border-amber-500 bg-amber-50 text-amber-700 shadow-sm'
+                  : 'border-violet-100 bg-white text-slate-500 hover:border-violet-300'
               }`}
               onClick={() => update('reflexosNeurologicosNormal', false)}
             >
-              <AlertTriangle className="h-4 w-4" />
+              <AlertTriangle className={`mr-1.5 inline h-4 w-4 ${form.reflexosNeurologicosNormal === false && form.reflexosNeurologicosDescricao ? 'text-amber-500' : 'text-slate-300'}`} />
               Descrever achados
             </button>
           </div>
@@ -834,7 +834,7 @@ function ExameFisicoRow({
               </span>
             )}
             {!isNormal && !isAltered && (
-              <span className="badge bg-slate-100 text-slate-500 text-[10px]">
+              <span className="badge bg-violet-50 text-violet-500 text-[10px]">
                 Não avaliado
               </span>
             )}
@@ -845,12 +845,12 @@ function ExameFisicoRow({
         </div>
         <button
           type="button"
-          className={`text-xs font-semibold px-3 py-1.5 rounded-md transition-colors flex-shrink-0 ${
+          className={`text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-200 flex-shrink-0 ${
             isAltered
-              ? 'bg-warning-100 text-warning-700 hover:bg-warning-200'
+              ? 'bg-warning-100 text-warning-700 hover:bg-warning-200 border border-warning-200'
               : isNormal
-                ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                ? 'bg-violet-50 text-violet-600 hover:bg-violet-100 border border-violet-200'
+                : 'bg-violet-50 text-violet-600 hover:bg-violet-100 border border-violet-200'
           }`}
           onClick={() => onChange({ normal: !field.normal, descricao: field.normal ? '' : undefined })}
         >
