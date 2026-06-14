@@ -69,6 +69,14 @@ export function Layout({ children, showPrint = false }: LayoutProps) {
             <span className="hidden sm:inline">·</span>
             <span>Avaliação Neonatal SBP 2022</span>
           </p>
+          <p className="mt-1.5 text-[10px] text-slate-400 sm:text-[11px]">
+            Desenvolvido por{' '}
+            <span className="font-semibold text-slate-500">Renato C. Miranda</span>
+            {' '}·{' '}
+            <a href="mailto:renatorcm@gmail.com" className="hover:text-violet-600 transition-colors underline underline-offset-2">
+              renatorcm@gmail.com
+            </a>
+          </p>
         </div>
       </footer>
     </div>
