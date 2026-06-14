@@ -780,7 +780,7 @@ function EvolucaoEnfermagemPage() {
 function AutoLine({ label, value, accent }: { label: string; value: string; accent?: 'rose' | 'emerald' | 'amber' | 'violet' | 'sky' }) {
   const colors: Record<string, string> = {
     rose: 'border-l-rose-400 bg-rose-50/50',
-    emerald: 'border-l-emerald-400 bg-emerald-50/50',
+    emerald: 'border-l-emerald-500 bg-emerald-50/50',
     amber: 'border-l-amber-400 bg-amber-50/50',
     violet: 'border-l-violet-400 bg-violet-50/50',
     sky: 'border-l-sky-400 bg-sky-50/50',
@@ -812,9 +812,9 @@ function ExameFisicoRow({
   return (
     <div className={`rounded-xl border p-3 transition-all duration-200 hover:shadow-sm ${
       isAltered
-        ? 'border-warning-200 bg-warning-50/30 border-l-2 border-l-warning-400'
+        ? 'border-amber-500 bg-amber-50 border-l-2 border-l-amber-500'
         : isNormal
-          ? 'border-emerald-200 bg-emerald-50/20 border-l-2 border-l-emerald-400'
+          ? 'border-emerald-500 bg-emerald-50 border-l-2 border-l-emerald-500'
           : 'border-violet-100 bg-white'
     }`}>
       <div className="flex items-start gap-3">
