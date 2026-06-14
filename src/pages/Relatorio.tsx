@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Copy, Printer, RotateCcw, FileText } from 'lucide-react';
+import { Copy, Printer, RotateCcw, FileText, Stethoscope, Pencil } from 'lucide-react';
 import { Layout } from '@/components/common/Layout';
 import { Alert } from '@/components/common/Alert';
 import { RequireMode, useEvaluationMode } from '@/hooks/useEvaluationMode';
@@ -19,6 +19,7 @@ import { calcularCapurro } from '@/services/capurroCalculator';
 import { calcularApgarMinuto, isApgarMinutoCompleto } from '@/services/apgarCalculator';
 import { classificarPesoPorIdadeGestacional } from '@/services/growthClassifier';
 import { buildClinicalAlerts } from '@/services/clinicalAlerts';
+import { gerarTextoEvolucao } from '@/services/evolucaoEnfermagem';
 import type { ApgarMinute } from '@/types/domain';
 
 const MINUTOS: ApgarMinute[] = [1, 5, 10, 15, 20];
@@ -29,6 +30,7 @@ function RelatorioPage() {
   const rn = useEvaluationStore((s) => s.rn);
   const apgar = useEvaluationStore((s) => s.apgar);
   const capurroState = useEvaluationStore((s) => s.capurro);
+  const evolucao = useEvaluationStore((s) => s.evolucao);
   const reset = useEvaluationStore((s) => s.reset);
   const [copiado, setCopiado] = useState(false);
 
@@ -67,6 +69,7 @@ function RelatorioPage() {
       : null;
 
   const apgar5 = apgarResultados[1] ?? undefined;
+  const apgar1 = apgarResultados[0] ?? undefined;
   const alerts = buildClinicalAlerts({
     rn,
     capurro: capurro ?? undefined,
@@ -74,9 +77,21 @@ function RelatorioPage() {
     apgar5min: apgar5,
   });
 
+  const textoEvolucao = useMemo(() => {
+    if (!evolucao) return null;
+    return gerarTextoEvolucao({
+      rn,
+      capurro,
+      growth,
+      apgar1min: apgar1,
+      apgar5min: apgar5,
+      evolucao,
+    });
+  }, [rn, capurro, growth, apgar1, apgar5, evolucao]);
+
   const texto = useMemo(
-    () => buildReportText({ modo, rn, apgarResultados, capurro, growth }),
-    [modo, rn, apgarResultados, capurro, growth],
+    () => buildReportText({ modo, rn, apgarResultados, capurro, growth, textoEvolucao }),
+    [modo, rn, apgarResultados, capurro, growth, textoEvolucao],
   );
 
   async function handleCopy() {
@@ -198,6 +213,20 @@ function RelatorioPage() {
         </section>
         )}
 
+        {textoEvolucao && (
+          <section className="mb-5">
+            <h2 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-slate-700">
+              <Stethoscope className="h-4 w-4 text-clinical-600" aria-hidden />
+              Evolução de Enfermagem do RN
+            </h2>
+            <div className="rounded-lg border border-clinical-200 bg-clinical-50/30 p-4">
+              <pre className="whitespace-pre-wrap font-mono text-xs text-slate-800 leading-relaxed">
+                {textoEvolucao}
+              </pre>
+            </div>
+          </section>
+        )}
+
         {alerts.length > 0 && (
           <section className="mb-5">
             <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-slate-700">
@@ -231,6 +260,12 @@ function RelatorioPage() {
         <button onClick={() => navigate(getRelatorioBack(modo))} className="btn-secondary">
           Voltar
         </button>
+        {evolucao && (
+          <button onClick={() => navigate('/evolucao/enfermagem')} className="btn-secondary">
+            <Pencil className="h-4 w-4" aria-hidden />
+            Editar evolução
+          </button>
+        )}
         <button onClick={handleNova} className="btn-primary">
           <RotateCcw className="h-4 w-4" aria-hidden />
           Nova avaliação
@@ -308,12 +343,14 @@ function buildReportText({
   apgarResultados,
   capurro,
   growth,
+  textoEvolucao,
 }: {
   modo: EvaluationMode;
   rn: ReturnType<typeof useEvaluationStore.getState>['rn'];
   apgarResultados: (ReturnType<typeof calcularApgarMinuto> | null)[];
   capurro: ReturnType<typeof calcularCapurro> | null;
   growth: ReturnType<typeof classificarPesoPorIdadeGestacional> | null;
+  textoEvolucao: string | null;
 }): string {
   const linhas: string[] = [];
   linhas.push(`${getRelatorioTitle(modo)} — SBP 2022`);
@@ -353,6 +390,13 @@ function buildReportText({
     linhas.push(`Curva utilizada: ${growth.referencia}`);
     linhas.push(`Classificação peso/IG: ${growth.classificacao}`);
     linhas.push(`Percentil estimado: ${growth.percentilEstimado}`);
+    linhas.push('');
+  }
+
+  if (textoEvolucao) {
+    linhas.push('--- Evolução de Enfermagem do RN ---');
+    linhas.push('');
+    linhas.push(textoEvolucao);
     linhas.push('');
   }
 

@@ -64,8 +64,7 @@ function ResultadoPesoPage() {
         subtitle="Classificação PIG/AIG/GIG conforme SBP 2022."
         backTo={getResultadoPesoBack(modo)}
         nextTo={getResultadoPesoNext()}
-        nextLabel="Ver relatório"
-        isFinal
+        nextLabel="Continuar"
       />
 
       <div className="space-y-4">

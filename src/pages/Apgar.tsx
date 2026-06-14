@@ -55,9 +55,8 @@ function ApgarPage() {
         subtitle="SBP 2022. Pontue cada sinal nos minutos 1 e 5. Se Apgar do 5º minuto for menor que 7, registre também 10, 15 e 20 minutos."
         backTo={getApgarBack(modo)}
         nextTo={getApgarNext(modo)}
-        nextLabel={modo === 'apgar' ? 'Ver relatório' : 'Continuar'}
+        nextLabel={modo === 'apgar' ? 'Continuar' : 'Continuar'}
         nextDisabled={!obrigatoriosOk}
-        isFinal={modo === 'apgar'}
       />
 
       <div className="space-y-4">

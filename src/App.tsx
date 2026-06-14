@@ -6,6 +6,8 @@ import Apgar from './pages/Apgar';
 import CapurroMetodo from './pages/CapurroMetodo';
 import CapurroParametros from './pages/CapurroParametros';
 import ResultadoCapurro from './pages/ResultadoCapurro';
+import DecisaoEvolucao from './pages/DecisaoEvolucao';
+import EvolucaoEnfermagem from './pages/EvolucaoEnfermagem';
 
 const ResultadoPeso = lazy(() => import('./pages/ResultadoPeso'));
 const Relatorio = lazy(() => import('./pages/Relatorio'));
@@ -29,6 +31,8 @@ export default function App() {
         <Route path="/capurro/parametros" element={<CapurroParametros />} />
         <Route path="/resultado/capurro" element={<ResultadoCapurro />} />
         <Route path="/resultado/peso" element={<ResultadoPeso />} />
+        <Route path="/evolucao/decidir" element={<DecisaoEvolucao />} />
+        <Route path="/evolucao/enfermagem" element={<EvolucaoEnfermagem />} />
         <Route path="/relatorio" element={<Relatorio />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

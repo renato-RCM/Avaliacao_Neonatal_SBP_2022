@@ -90,6 +90,7 @@
 @media print {
   body {
     background: white;
+    color: black;
   }
 
   .no-print {
@@ -98,5 +99,52 @@
 
   .print-break-before {
     break-before: page;
+  }
+
+  /* Garante que o artigo do relatório ocupe a largura total */
+  article {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Remove fundos e bordas de containers internos */
+  .rounded-xl,
+  .rounded-lg {
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  /* Garante que textos pré-formatados quebrem linha */
+  pre {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    font-size: 10px !important;
+  }
+
+  /* Tabelas mantêm estrutura */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 4px 8px;
+  }
+
+  /* Badges mantêm cores no print */
+  .badge {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Oculta header/footer da impressão (navegador) */
+  @page {
+    margin: 1.5cm;
+    size: A4;
   }
 }

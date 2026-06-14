@@ -8,6 +8,7 @@ import {
   Heart,
   LineChart,
   RotateCcw,
+  Stethoscope,
 } from 'lucide-react';
 import { Layout } from '@/components/common/Layout';
 import { useEvaluationStore } from '@/store/useEvaluationStore';
@@ -37,6 +38,11 @@ const MODOS: {
     modo: 'capurro_peso',
     icon: <LineChart className="h-6 w-6" aria-hidden />,
     accent: 'from-emerald-600 to-emerald-800',
+  },
+  {
+    modo: 'enfermagem',
+    icon: <Stethoscope className="h-6 w-6" aria-hidden />,
+    accent: 'from-violet-600 to-violet-800',
   },
 ];
 

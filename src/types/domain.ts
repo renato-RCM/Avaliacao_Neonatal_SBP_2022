@@ -1,7 +1,7 @@
 export type Sexo = 'M' | 'F';
 
 /** Modo de uso escolhido no menu principal. */
-export type EvaluationMode = 'completa' | 'apgar' | 'capurro_peso';
+export type EvaluationMode = 'completa' | 'apgar' | 'capurro_peso' | 'enfermagem';
 
 export type CapurroMethod = 'capurro_somatico' | 'capurro_somatoneurologico';
 
@@ -130,6 +130,102 @@ export interface PercentileRow {
 }
 
 export type GrowthClassification = 'PIG' | 'AIG' | 'GIG';
+
+// ---- Evolução de Enfermagem ----
+
+export interface ExameFisicoField {
+  normal: boolean;
+  descricao?: string;
+}
+
+export type ViaNascimento = 'vaginal' | 'cesarea' | 'forceps';
+
+export interface EvolucaoEnfermagemData {
+  // Bloco 2: Dados maternos e exames
+  viaNascimento?: ViaNascimento;
+  tipoSanguineoMae?: string;
+  tipoSanguineoRN?: string;
+  testesRapidosMaternos?: string;
+
+  // Bloco 3: Amamentação, eliminações e vínculo
+  amamentacaoDificuldade?: boolean;
+  amamentacaoObservacao?: string;
+  eliminacoesVesicais?: boolean;
+  eliminacoesIntestinais?: boolean;
+  eliminacoesObservacao?: string;
+  vinculoBinomio?: string;
+
+  // Bloco 4: Sinais vitais
+  frequenciaCardiaca?: number;
+  frequenciaRespiratoria?: number;
+  temperatura?: number;
+
+  // Bloco 5: Exame físico (normal = marcado como normal; se false, campo está alterado)
+  exameFisicoTodoNormal: boolean;
+  cranio: ExameFisicoField;
+  fontanelas: ExameFisicoField;
+  facies: ExameFisicoField;
+  olhos: ExameFisicoField;
+  nariz: ExameFisicoField;
+  boca: ExameFisicoField;
+  orelhas: ExameFisicoField;
+  pescoco: ExameFisicoField;
+  torax: ExameFisicoField;
+  claviculas: ExameFisicoField;
+  mamas: ExameFisicoField;
+  acv: ExameFisicoField;
+  ar: ExameFisicoField;
+  abdome: ExameFisicoField;
+  cotoUmbilical: ExameFisicoField;
+  quadril: ExameFisicoField;
+  genitalia: ExameFisicoField;
+  anus: ExameFisicoField;
+  extremidades: ExameFisicoField;
+  perfusao: ExameFisicoField;
+  pulsos: ExameFisicoField;
+
+  // Bloco 6: Reflexos neurológicos
+  reflexosNeurologicosNormal: boolean;
+  reflexosNeurologicosDescricao?: string;
+
+  // Bloco 7: Intervenções
+  intervencoes?: string;
+
+  // Bloco 8: Prescrição
+  prescricao?: string;
+}
+
+export function createDefaultExameFisicoField(): ExameFisicoField {
+  return { normal: false };
+}
+
+export function createDefaultEvolucao(): EvolucaoEnfermagemData {
+  return {
+    exameFisicoTodoNormal: false,
+    cranio: createDefaultExameFisicoField(),
+    fontanelas: createDefaultExameFisicoField(),
+    facies: createDefaultExameFisicoField(),
+    olhos: createDefaultExameFisicoField(),
+    nariz: createDefaultExameFisicoField(),
+    boca: createDefaultExameFisicoField(),
+    orelhas: createDefaultExameFisicoField(),
+    pescoco: createDefaultExameFisicoField(),
+    torax: createDefaultExameFisicoField(),
+    claviculas: createDefaultExameFisicoField(),
+    mamas: createDefaultExameFisicoField(),
+    acv: createDefaultExameFisicoField(),
+    ar: createDefaultExameFisicoField(),
+    abdome: createDefaultExameFisicoField(),
+    cotoUmbilical: createDefaultExameFisicoField(),
+    quadril: createDefaultExameFisicoField(),
+    genitalia: createDefaultExameFisicoField(),
+    anus: createDefaultExameFisicoField(),
+    extremidades: createDefaultExameFisicoField(),
+    perfusao: createDefaultExameFisicoField(),
+    pulsos: createDefaultExameFisicoField(),
+    reflexosNeurologicosNormal: false,
+  };
+}
 
 export interface GrowthResult {
   status: 'ok' | 'erro';

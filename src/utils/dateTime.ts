@@ -176,3 +176,16 @@ export function splitISODateTime(iso?: string): { date: string; time: string } {
   const time = t ? t.slice(0, 5) : '';
   return { date: d ?? '', time };
 }
+
+/**
+ * Calcula idade em horas de vida a partir da data/hora de nascimento ISO.
+ * Retorna null se a data não estiver disponível.
+ */
+export function calcularIdadeHorasVida(iso?: string): number | null {
+  if (!iso) return null;
+  const nascimento = new Date(iso);
+  if (isNaN(nascimento.getTime())) return null;
+  const agora = new Date();
+  const diffHoras = (agora.getTime() - nascimento.getTime()) / (1000 * 60 * 60);
+  return Math.max(0, diffHoras);
+}

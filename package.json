@@ -1,46 +1,36 @@
 {
-  "name": "avaliacao-neonatal-sbp-2022",
+  "name": "avaliacao-neonatal-sbp2022",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.1.0",
   "type": "module",
-  "description": "App clínico de apoio à avaliação neonatal: Apgar ampliado, Capurro e classificação PIG/AIG/GIG conforme SBP 2022",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css,json,md}\""
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "lucide-react": "^0.468.0",
+    "lucide-react": "^0.460.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
-    "recharts": "^2.13.3",
-    "zustand": "^5.0.1"
+    "recharts": "^2.14.1",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
-    "@testing-library/user-event": "^14.5.2",
-    "@types/node": "^20.19.41",
+    "@testing-library/react": "^16.1.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@typescript-eslint/eslint-plugin": "^8.15.0",
-    "@typescript-eslint/parser": "^8.15.0",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.1",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.14",
     "jsdom": "^25.0.1",
     "postcss": "^8.4.49",
-    "prettier": "^3.4.1",
-    "tailwindcss": "^3.4.15",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.11",
-    "vitest": "^2.1.6"
+    "tailwindcss": "^3.4.16",
+    "typescript": "~5.6.2",
+    "vite": "^5.4.21",
+    "vitest": "^2.1.8"
   }
 }

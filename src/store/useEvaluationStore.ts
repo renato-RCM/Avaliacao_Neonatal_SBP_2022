@@ -8,8 +8,10 @@ import type {
   CapurroItemKey,
   CapurroMethod,
   EvaluationMode,
+  EvolucaoEnfermagemData,
   RNData,
 } from '@/types/domain';
+import { createDefaultEvolucao } from '@/types/domain';
 
 interface EvaluationState {
   rn: RNData;
@@ -20,6 +22,7 @@ interface EvaluationState {
     metodo?: CapurroMethod;
     respostas: Partial<Record<CapurroItemKey, number>>;
   };
+  evolucao?: EvolucaoEnfermagemData;
   ui: {
     modo?: EvaluationMode;
     iniciadoEm?: string;
@@ -32,6 +35,8 @@ interface EvaluationState {
   toggleApgarIntervencao: (minuto: ApgarMinute, intervencao: string) => void;
   setCapurroMetodo: (metodo: CapurroMethod) => void;
   setCapurroResposta: (item: CapurroItemKey, score: number) => void;
+  setEvolucao: (data: Partial<EvolucaoEnfermagemData>) => void;
+  clearEvolucao: () => void;
   reset: () => void;
 }
 
@@ -53,7 +58,7 @@ const initialState: Omit<
 
 export const useEvaluationStore = create<EvaluationState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       ...initialState,
 
       iniciarModo: (modo) => {
@@ -129,22 +134,47 @@ export const useEvaluationStore = create<EvaluationState>()(
           },
         })),
 
+      setEvolucao: (data) =>
+        set((state) => ({
+          evolucao: {
+            ...(state.evolucao ?? createDefaultEvolucao()),
+            ...data,
+          },
+        })),
+
+      clearEvolucao: () =>
+        set(() => ({
+          evolucao: undefined,
+        })),
+
       reset: () => {
         set({ ...initialState });
-        // Garante que o suspect persistido seja limpo também
+        // Garante que o estado persistido seja completamente limpo
         try {
           localStorage.removeItem('avaliacao-neonatal-sbp-2022');
         } catch {
           /* ignore */
         }
-        // Reaplica timestamp inicial
-        set((state) => ({ ui: { ...state.ui, iniciadoEm: undefined } }));
-        void get();
+        // Reaplica timestamp inicial limpo
+        set({ rn: {}, apgar: { registros: {} }, capurro: { respostas: {} }, evolucao: undefined, ui: {} });
       },
     }),
     {
       name: 'avaliacao-neonatal-sbp-2022',
-      version: 2,
+      version: 3,
+      migrate: (persistedState: unknown) => {
+        // v3: remove evolucao de dados persistidos antigos
+        const state = persistedState as Record<string, unknown> | null;
+        if (state && typeof state === 'object') {
+          delete state.evolucao;
+        }
+        return state ?? {};
+      },
+      partialize: (state) => {
+        // Exclui evolucao da persistência — deve sempre começar limpa
+        const { evolucao, ...rest } = state;
+        return rest;
+      },
     },
   ),
 );

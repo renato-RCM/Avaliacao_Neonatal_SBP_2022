@@ -21,7 +21,7 @@ function CadastroForm() {
   const modo = useEvaluationMode();
   const rn = useEvaluationStore((s) => s.rn);
   const setRN = useEvaluationStore((s) => s.setRN);
-  const exigeSexoPeso = modo !== 'apgar';
+  const exigeSexoPeso = modo !== 'apgar' && modo !== 'enfermagem';
 
   const partesIniciais = splitISODateTime(rn.dataHoraNascimento);
 
@@ -79,7 +79,9 @@ function CadastroForm() {
         subtitle={
           exigeSexoPeso
             ? 'Identificação do recém-nascido. Sexo e peso são obrigatórios para Capurro e classificação PIG/AIG/GIG.'
-            : 'Identificação do recém-nascido para o Boletim de Apgar. Sexo e peso são opcionais neste módulo.'
+            : modo === 'enfermagem'
+              ? 'Identificação do recém-nascido para a Evolução de Enfermagem. Sexo e peso são opcionais.'
+              : 'Identificação do recém-nascido para o Boletim de Apgar. Sexo e peso são opcionais neste módulo.'
         }
         backTo="/"
         nextTo={getCadastroNext(modo)}
@@ -243,13 +245,19 @@ function CadastroForm() {
             id="avaliador"
             type="text"
             className="input"
-            placeholder="Ex.: Dr(a). nome"
+            placeholder="Ex.: nome do profissional"
             value={avaliador}
             onChange={(e) => setAvaliador(e.target.value)}
             autoComplete="off"
           />
         </div>
 
+        {modo === 'enfermagem' && (
+          <Alert severity="info" title="Próximos passos">
+            A próxima etapa é o <strong>formulário de Evolução de Enfermagem</strong> com exame
+            físico, sinais vitais, intervenções e prescrições de enfermagem.
+          </Alert>
+        )}
         {modo === 'apgar' && (
           <Alert severity="info" title="Próximos passos">
             A próxima etapa é o <strong>Boletim de Apgar ampliado</strong> nos minutos 1 e 5. Se o
