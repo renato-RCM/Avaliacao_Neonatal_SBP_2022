@@ -155,19 +155,30 @@ function EvolucaoEnfermagemPage() {
 
   // ── Salvar e ir para relatório ──
   function handleSalvarEGerar() {
-    // Valida: sistemas marcados como alterado devem ter descrição preenchida
-    const pendentes: string[] = [];
+    // Valida: sistemas não avaliados ou marcados como alterado sem descrição
+    const pendentesAlterados: string[] = [];
+    const pendentesNaoAvaliados: string[] = [];
     for (const s of SISTEMAS) {
       const field = form[s.key] as ExameFisicoField | undefined;
-      if (field && !field.normal && (!field.descricao || !field.descricao.trim())) {
-        pendentes.push(s.label);
+      if (!field) continue;
+      if (!field.normal && field.descricao === undefined) {
+        pendentesNaoAvaliados.push(s.label);
+      } else if (!field.normal && (!field.descricao || !field.descricao.trim())) {
+        pendentesAlterados.push(s.label);
       }
     }
-    if (pendentes.length > 0) {
+    if (pendentesNaoAvaliados.length > 0) {
       setValidationError(
-        `Os seguintes sistemas estão marcados como alterados mas sem descrição: ${pendentes.join(', ')}. Preencha a descrição ou marque como normal.`,
+        `Os seguintes sistemas ainda não foram avaliados: ${pendentesNaoAvaliados.join(', ')}. Marque como normal ou alterado antes de salvar.`,
       );
-      // Rola para o bloco de exame físico
+      const el = document.getElementById('bloco-exame-fisico');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (pendentesAlterados.length > 0) {
+      setValidationError(
+        `Os seguintes sistemas estão marcados como alterados mas sem descrição: ${pendentesAlterados.join(', ')}. Preencha a descrição ou marque como normal.`,
+      );
       const el = document.getElementById('bloco-exame-fisico');
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -650,13 +661,13 @@ function EvolucaoEnfermagemPage() {
             <button
               type="button"
               className={`flex-1 rounded-xl border-2 px-4 py-3 text-sm font-semibold transition-all duration-200 ${
-                form.reflexosNeurologicosNormal === false && form.reflexosNeurologicosDescricao
+                form.reflexosNeurologicosNormal === false
                   ? 'border-amber-500 bg-amber-50 text-amber-700 shadow-sm'
                   : 'border-violet-100 bg-white text-slate-500 hover:border-violet-300'
               }`}
               onClick={() => update('reflexosNeurologicosNormal', false)}
             >
-              <AlertTriangle className={`mr-1.5 inline h-4 w-4 ${form.reflexosNeurologicosNormal === false && form.reflexosNeurologicosDescricao ? 'text-amber-500' : 'text-slate-300'}`} />
+              <AlertTriangle className={`mr-1.5 inline h-4 w-4 ${form.reflexosNeurologicosNormal === false ? 'text-amber-500' : 'text-slate-300'}`} />
               Descrever achados
             </button>
           </div>
