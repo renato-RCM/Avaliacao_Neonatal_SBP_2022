@@ -129,7 +129,7 @@ function MinutoApgar({
             Apgar = {total}
           </span>
         ) : (
-          <span className="badge bg-slate-100 text-slate-600">Pendente</span>
+          <span className="badge bg-violet-50 text-violet-600">Pendente</span>
         )
       }
     >
@@ -157,7 +157,7 @@ function MinutoApgar({
           );
         })}
 
-        <div className="rounded-lg bg-slate-50 p-3">
+        <div className="rounded-xl bg-violet-50/50 p-3">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-600">
             Manobras de reanimação registradas neste minuto
           </p>
@@ -170,8 +170,8 @@ function MinutoApgar({
                   type="button"
                   className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
                     checked
-                      ? 'border-clinical-600 bg-clinical-600 text-white'
-                      : 'border-slate-300 bg-white text-slate-700 hover:border-clinical-400'
+                      ? 'border-violet-600 bg-violet-600 text-white'
+                      : 'border-violet-200 bg-white text-slate-700 hover:border-violet-400'
                   }`}
                   onClick={() => onToggleIntervencao(minuto, interv)}
                   aria-pressed={checked}

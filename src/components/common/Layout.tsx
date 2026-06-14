@@ -11,7 +11,7 @@ export function Layout({ children, showPrint = false }: LayoutProps) {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-violet-50/30">
       <header className="sticky top-0 z-30 border-b border-violet-100 bg-white/90 backdrop-blur-md no-print">
         <div className="container-app flex items-center justify-between py-3">
           <Link to="/" className="flex items-center gap-2 text-slate-900 hover:text-violet-700 transition-colors">
@@ -51,9 +51,9 @@ export function Layout({ children, showPrint = false }: LayoutProps) {
 
       <main className="container-app py-5 pb-28 sm:py-8">{children}</main>
 
-      <footer className="border-t border-slate-200 bg-white no-print">
+      <footer className="border-t border-violet-100 bg-white no-print">
         <div className="container-app py-4 text-[11px] leading-relaxed text-slate-500 sm:text-xs">
-          <p className="font-semibold text-slate-700">Aviso clínico</p>
+          <p className="font-semibold text-violet-700">Aviso clínico</p>
           <p>
             Este aplicativo é uma ferramenta de apoio à avaliação profissional. Os resultados
             <strong> não substituem </strong>
@@ -62,7 +62,7 @@ export function Layout({ children, showPrint = false }: LayoutProps) {
             diretrizes SBP 2022.
           </p>
           <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-slate-400 sm:text-[11px]">
-            <span className="rounded bg-slate-100 px-1.5 py-0.5 font-mono font-semibold text-slate-600">
+            <span className="rounded bg-violet-50 px-1.5 py-0.5 font-mono font-semibold text-violet-600">
               v{__APP_VERSION__}
             </span>
             <span>build {__APP_BUILD_DATE__}</span>

@@ -18,7 +18,7 @@ export function SectionCard({ title, description, children, badge, rightSlot }: 
             {badge}
           </div>
           {description && (
-            <p className="mt-0.5 text-xs leading-relaxed text-slate-600 sm:text-sm">
+            <p className="mt-0.5 text-xs leading-relaxed text-slate-500 sm:text-sm">
               {description}
             </p>
           )}

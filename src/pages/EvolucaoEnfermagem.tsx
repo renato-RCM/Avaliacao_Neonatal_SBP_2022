@@ -270,7 +270,7 @@ function EvolucaoEnfermagemPage() {
                         className={`rounded-lg border px-2 py-3 text-sm font-bold transition-all ${
                           sel
                             ? 'border-clinical-600 bg-clinical-600 text-white shadow-sm'
-                            : 'border-slate-200 bg-white text-slate-600 hover:border-clinical-300 hover:text-clinical-700 active:bg-clinical-50'
+                            : 'border-violet-200 bg-white text-slate-600 hover:border-violet-300 hover:text-violet-700 active:bg-violet-50'
                         }`}
                         onClick={() =>
                           update('tipoSanguineoMae', sel ? undefined : tipo)
@@ -305,7 +305,7 @@ function EvolucaoEnfermagemPage() {
                         className={`rounded-lg border px-2 py-3 text-sm font-bold transition-all ${
                           sel
                             ? 'border-clinical-600 bg-clinical-600 text-white shadow-sm'
-                            : 'border-slate-200 bg-white text-slate-600 hover:border-clinical-300 hover:text-clinical-700 active:bg-clinical-50'
+                            : 'border-violet-200 bg-white text-slate-600 hover:border-violet-300 hover:text-violet-700 active:bg-violet-50'
                         }`}
                         onClick={() =>
                           update('tipoSanguineoRN', sel ? undefined : tipo)
@@ -321,7 +321,7 @@ function EvolucaoEnfermagemPage() {
                     className={`rounded-lg border px-2 py-3 text-sm font-semibold transition-all col-span-4 sm:col-span-1 ${
                       form.tipoSanguineoRN === 'Solicitada'
                         ? 'border-amber-500 bg-amber-50 text-amber-700 shadow-sm'
-                        : 'border-slate-200 bg-white text-slate-500 hover:border-amber-300 hover:text-amber-600'
+                        : 'border-violet-200 bg-white text-slate-500 hover:border-amber-300 hover:text-amber-600'
                     }`}
                     onClick={() =>
                       update(
@@ -707,7 +707,7 @@ function EvolucaoEnfermagemPage() {
               rows={15}
             />
           ) : (
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className="rounded-2xl border border-violet-100 bg-violet-50/30 p-4">
               <pre className="whitespace-pre-wrap font-mono text-xs text-slate-700 leading-relaxed max-h-[200px] overflow-y-auto">
                 {textoEvolucao}
               </pre>
@@ -758,7 +758,7 @@ function EvolucaoEnfermagemPage() {
 
 function AutoLine({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded border border-slate-200 bg-slate-50 p-2">
+    <div className="rounded-xl border border-violet-100 bg-violet-50/30 p-2">
       <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
       <p className="text-sm font-semibold text-slate-900">{value}</p>
     </div>
@@ -781,7 +781,7 @@ function ExameFisicoRow({
   const hasDescricao = !!field.descricao;
 
   return (
-    <div className="rounded-lg border border-slate-200 p-3">
+    <div className="rounded-xl border border-violet-100 p-3">
       <div className="flex items-start gap-3">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">

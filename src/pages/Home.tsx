@@ -61,7 +61,7 @@ export default function Home() {
   return (
     <Layout>
       <section className="mx-auto max-w-2xl">
-        <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-6">
+        <div className="mb-6 rounded-2xl border border-violet-100 bg-white p-5 shadow-card sm:p-6">
           <div className="mb-3 flex items-center gap-2">
             <span className="grid h-10 w-10 place-items-center rounded-lg bg-clinical-100 text-clinical-700">
               <Baby className="h-6 w-6" aria-hidden />
@@ -136,7 +136,7 @@ export default function Home() {
           </div>
         )}
 
-        <div className="mt-6 rounded-xl border border-slate-200 bg-white p-4 text-xs leading-relaxed text-slate-600 sm:text-sm">
+        <div className="mt-6 rounded-2xl border border-violet-100 bg-white p-4 text-xs leading-relaxed text-slate-500 sm:text-sm">
           <p className="mb-2 flex items-center gap-2 font-semibold text-slate-800">
             <BookOpen className="h-4 w-4 text-clinical-600" aria-hidden />
             Referências oficiais

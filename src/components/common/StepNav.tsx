@@ -61,7 +61,7 @@ export function StepNav({
       </div>
 
       {(backTo || nextTo || onNext) && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur no-print">
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-violet-100 bg-white/90 backdrop-blur-md no-print">
           <div className="container-app flex items-center justify-between gap-3 py-3">
             {backTo ? (
               <button

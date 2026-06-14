@@ -90,12 +90,12 @@ function CadastroForm() {
         onNext={handleNext}
       />
 
-      <p className="mb-4 rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+      <p className="mb-4 rounded-xl bg-violet-50 px-3 py-2 text-xs font-medium text-violet-700">
         Módulo: {MODE_LABELS[modo]}
       </p>
 
       <div className="space-y-4">
-        <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
+        <div className="rounded-2xl border border-violet-100 bg-white p-4 sm:p-5 shadow-card">
           <label className="label" htmlFor="identificacao">
             Identificação do RN <span className="font-normal text-slate-400">(opcional)</span>
           </label>
@@ -113,7 +113,7 @@ function CadastroForm() {
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
+        <div className="rounded-2xl border border-violet-100 bg-white p-4 sm:p-5 shadow-card">
           <span className="label">
             Sexo biológico ao nascimento{' '}
             {exigeSexoPeso ? (
@@ -126,7 +126,7 @@ function CadastroForm() {
             <button
               type="button"
               className={`card-clickable !py-4 text-center font-semibold ${
-                sexo === 'M' ? 'card-selected text-clinical-800' : 'text-slate-700'
+                sexo === 'M' ? 'card-selected text-violet-700' : 'text-slate-700'
               }`}
               onClick={() => setSexo('M')}
               aria-pressed={sexo === 'M'}
@@ -136,7 +136,7 @@ function CadastroForm() {
             <button
               type="button"
               className={`card-clickable !py-4 text-center font-semibold ${
-                sexo === 'F' ? 'card-selected text-clinical-800' : 'text-slate-700'
+                sexo === 'F' ? 'card-selected text-violet-700' : 'text-slate-700'
               }`}
               onClick={() => setSexo('F')}
               aria-pressed={sexo === 'F'}
@@ -151,7 +151,7 @@ function CadastroForm() {
           )}
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
+        <div className="rounded-2xl border border-violet-100 bg-white p-4 sm:p-5 shadow-card">
           <label className="label" htmlFor="peso">
             Peso ao nascer (gramas){' '}
             {exigeSexoPeso ? (
@@ -182,7 +182,7 @@ function CadastroForm() {
           )}
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
+        <div className="rounded-2xl border border-violet-100 bg-white p-4 sm:p-5 shadow-card">
           <span className="label">
             Data e hora do nascimento{' '}
             <span className="font-normal text-slate-400">(opcional)</span>
@@ -237,7 +237,7 @@ function CadastroForm() {
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
+        <div className="rounded-2xl border border-violet-100 bg-white p-4 sm:p-5 shadow-card">
           <label className="label" htmlFor="avaliador">
             Avaliador <span className="font-normal text-slate-400">(opcional)</span>
           </label>

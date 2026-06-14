@@ -14,7 +14,7 @@ const Relatorio = lazy(() => import('./pages/Relatorio'));
 
 function PageFallback() {
   return (
-    <div className="grid min-h-screen place-items-center bg-slate-50 text-sm text-slate-500">
+    <div className="grid min-h-screen place-items-center bg-violet-50/50 text-sm text-slate-500">
       Carregando…
     </div>
   );

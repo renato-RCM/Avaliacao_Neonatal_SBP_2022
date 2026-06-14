@@ -115,7 +115,7 @@ function MetodoCard({
             {itens.map((it) => (
               <span
                 key={it}
-                className="rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700"
+                className="rounded-md bg-violet-50 px-2 py-0.5 text-[11px] font-medium text-violet-700"
               >
                 {capurroConfig.items[it as keyof typeof capurroConfig.items]?.label ?? it}
               </span>

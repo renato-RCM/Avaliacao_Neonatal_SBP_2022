@@ -66,7 +66,7 @@ function CapurroParametrosPage() {
         nextDisabled={!completo}
       />
 
-      <div className="mb-4 grid grid-cols-3 gap-2 rounded-xl border border-slate-200 bg-white p-3 shadow-card">
+      <div className="mb-4 grid grid-cols-3 gap-2 rounded-2xl border border-violet-100 bg-white p-3 shadow-card">
         <Stat label="Itens" value={`${totalRespondidos}/${itens.length}`} />
         <Stat label="Soma de pontos" value={`${somaParcial}`} />
         <Stat
@@ -89,7 +89,7 @@ function CapurroParametrosPage() {
                 valor !== undefined ? (
                   <span className="badge bg-clinical-600 text-white">{valor} pontos</span>
                 ) : (
-                  <span className="badge bg-slate-100 text-slate-600">Pendente</span>
+                  <span className="badge bg-violet-50 text-violet-600">Pendente</span>
                 )
               }
             >

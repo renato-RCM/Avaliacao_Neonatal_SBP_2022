@@ -41,8 +41,8 @@ export function OptionCard({
             selected
               ? 'bg-clinical-600 text-white'
               : showAsApgar
-                ? 'bg-slate-100 text-slate-700'
-                : 'bg-clinical-100 text-clinical-700'
+                ? 'bg-violet-50 text-violet-700'
+                : 'bg-violet-100 text-violet-700'
           }`}
         >
           {finalScoreLabel}
@@ -55,7 +55,7 @@ export function OptionCard({
       </div>
 
       {url && (
-        <div className="my-3 flex aspect-[3/2] items-center justify-center overflow-hidden rounded-lg bg-slate-50">
+        <div className="my-3 flex aspect-[3/2] items-center justify-center overflow-hidden rounded-xl bg-violet-50/50">
           <img src={url} alt={label} loading="lazy" className="max-h-full max-w-full" />
         </div>
       )}
