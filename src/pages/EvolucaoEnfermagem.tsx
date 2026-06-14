@@ -357,24 +357,34 @@ function EvolucaoEnfermagemPage() {
                   ['hivMae', 'HIV'],
                   ['hepatiteBMae', 'Hepatite B'],
                   ['hepatiteCMae', 'Hepatite C'],
-                ] as const).map(([key, label]) => (
+                ] as const).map(([key, label]) => {
+                  const val = (form[key] as string) ?? '';
+                  const selected = val !== '';
+                  return (
                   <div key={key}>
                     <label className="mb-1 block text-xs font-medium text-slate-600" htmlFor={`teste-${key}`}>
                       {label}
                     </label>
-                    <select
-                      id={`teste-${key}`}
-                      className="input !py-2 text-sm"
-                      value={(form[key] as string) ?? ''}
-                      onChange={(e) => update(key, (e.target.value || undefined) as EvolucaoEnfermagemData[typeof key])}
-                    >
-                      <option value="">Selecione...</option>
-                      <option value="nao_reagente">Não reagente</option>
-                      <option value="reagente">Reagente</option>
-                      <option value="nao_necessario">Não necessário</option>
-                    </select>
+                    <div className="relative">
+                      <select
+                        id={`teste-${key}`}
+                        className={`input !py-2.5 !pr-10 text-sm appearance-none cursor-pointer transition-all ${
+                          selected
+                            ? 'border-violet-400 bg-violet-50/50 font-semibold text-violet-700'
+                            : ''
+                        }`}
+                        value={val}
+                        onChange={(e) => update(key, (e.target.value || undefined) as EvolucaoEnfermagemData[typeof key])}
+                      >
+                        <option value="">Selecione...</option>
+                        <option value="nao_reagente">Não reagente</option>
+                        <option value="reagente">Reagente</option>
+                        <option value="nao_necessario">Não necessário</option>
+                      </select>
+                      <ChevronUp className={`pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 transition-all ${selected ? 'text-violet-500' : 'text-slate-400'}`} />
+                    </div>
                   </div>
-                ))}
+                );})}
               </div>
             </div>
           </div>
@@ -393,24 +403,26 @@ function EvolucaoEnfermagemPage() {
               <div className="flex gap-2">
                 <button
                   type="button"
-                  className={`card-clickable !py-2 px-4 text-sm font-semibold ${
+                  className={`flex-1 rounded-xl border-2 px-4 py-3 text-sm font-semibold transition-all duration-200 ${
                     form.amamentacaoDificuldade === false
-                      ? 'card-selected text-clinical-800'
-                      : 'text-slate-700'
+                      ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-sm'
+                      : 'border-violet-100 bg-white text-slate-500 hover:border-violet-300 hover:text-slate-700'
                   }`}
-                  onClick={() => update('amamentacaoDificuldade', false)}
+                  onClick={() => update('amamentacaoDificuldade', form.amamentacaoDificuldade === false ? undefined : false)}
                 >
+                  <CheckCircle2 className={`mr-1.5 inline h-4 w-4 ${form.amamentacaoDificuldade === false ? 'text-emerald-500' : 'text-slate-300'}`} />
                   Nega dificuldades
                 </button>
                 <button
                   type="button"
-                  className={`card-clickable !py-2 px-4 text-sm font-semibold ${
+                  className={`flex-1 rounded-xl border-2 px-4 py-3 text-sm font-semibold transition-all duration-200 ${
                     form.amamentacaoDificuldade === true
-                      ? 'card-selected text-warning-700 border-warning-600 ring-warning-600/30 bg-warning-50'
-                      : 'text-slate-700'
+                      ? 'border-amber-500 bg-amber-50 text-amber-700 shadow-sm'
+                      : 'border-violet-100 bg-white text-slate-500 hover:border-violet-300 hover:text-slate-700'
                   }`}
-                  onClick={() => update('amamentacaoDificuldade', true)}
+                  onClick={() => update('amamentacaoDificuldade', form.amamentacaoDificuldade === true ? undefined : true)}
                 >
+                  <AlertTriangle className={`mr-1.5 inline h-4 w-4 ${form.amamentacaoDificuldade === true ? 'text-amber-500' : 'text-slate-300'}`} />
                   Relata dificuldades
                 </button>
               </div>
@@ -433,64 +445,62 @@ function EvolucaoEnfermagemPage() {
             {/* Eliminações */}
             <div>
               <span className="label">Eliminações no pós-parto imediato</span>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="flex items-center gap-3 rounded-lg border border-slate-200 p-3">
-                  <span className="text-sm font-medium text-slate-700">Vesicais:</span>
-                  <button
-                    type="button"
-                    className={`text-xs font-semibold px-3 py-1.5 rounded-md transition-colors ${
-                      form.eliminacoesVesicais === true
-                        ? 'bg-clinical-600 text-white'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
-                    onClick={() =>
-                      update('eliminacoesVesicais', form.eliminacoesVesicais === true ? undefined : true)
-                    }
-                  >
-                    Presentes
-                  </button>
-                  <button
-                    type="button"
-                    className={`text-xs font-semibold px-3 py-1.5 rounded-md transition-colors ${
-                      form.eliminacoesVesicais === false
-                        ? 'bg-slate-600 text-white'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
-                    onClick={() =>
-                      update('eliminacoesVesicais', form.eliminacoesVesicais === false ? undefined : false)
-                    }
-                  >
-                    Ausentes
-                  </button>
+              <div className="grid grid-cols-2 gap-3">
+                {/* Vesicais */}
+                <div className="rounded-xl border border-violet-100 bg-white p-3">
+                  <span className="mb-2 block text-xs font-semibold text-slate-600">Vesicais</span>
+                  <div className="flex gap-1.5">
+                    <button
+                      type="button"
+                      className={`flex-1 rounded-lg px-3 py-2 text-xs font-semibold transition-all duration-200 ${
+                        form.eliminacoesVesicais === true
+                          ? 'bg-emerald-500 text-white shadow-sm'
+                          : 'bg-slate-100 text-slate-500 hover:bg-emerald-50 hover:text-emerald-600'
+                      }`}
+                      onClick={() => update('eliminacoesVesicais', form.eliminacoesVesicais === true ? undefined : true)}
+                    >
+                      Presentes
+                    </button>
+                    <button
+                      type="button"
+                      className={`flex-1 rounded-lg px-3 py-2 text-xs font-semibold transition-all duration-200 ${
+                        form.eliminacoesVesicais === false
+                          ? 'bg-slate-500 text-white shadow-sm'
+                          : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-600'
+                      }`}
+                      onClick={() => update('eliminacoesVesicais', form.eliminacoesVesicais === false ? undefined : false)}
+                    >
+                      Ausentes
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 rounded-lg border border-slate-200 p-3">
-                  <span className="text-sm font-medium text-slate-700">Intestinais:</span>
-                  <button
-                    type="button"
-                    className={`text-xs font-semibold px-3 py-1.5 rounded-md transition-colors ${
-                      form.eliminacoesIntestinais === true
-                        ? 'bg-clinical-600 text-white'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
-                    onClick={() =>
-                      update('eliminacoesIntestinais', form.eliminacoesIntestinais === true ? undefined : true)
-                    }
-                  >
-                    Presentes
-                  </button>
-                  <button
-                    type="button"
-                    className={`text-xs font-semibold px-3 py-1.5 rounded-md transition-colors ${
-                      form.eliminacoesIntestinais === false
-                        ? 'bg-slate-600 text-white'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
-                    onClick={() =>
-                      update('eliminacoesIntestinais', form.eliminacoesIntestinais === false ? undefined : false)
-                    }
-                  >
-                    Ausentes
-                  </button>
+                {/* Intestinais */}
+                <div className="rounded-xl border border-violet-100 bg-white p-3">
+                  <span className="mb-2 block text-xs font-semibold text-slate-600">Intestinais</span>
+                  <div className="flex gap-1.5">
+                    <button
+                      type="button"
+                      className={`flex-1 rounded-lg px-3 py-2 text-xs font-semibold transition-all duration-200 ${
+                        form.eliminacoesIntestinais === true
+                          ? 'bg-emerald-500 text-white shadow-sm'
+                          : 'bg-slate-100 text-slate-500 hover:bg-emerald-50 hover:text-emerald-600'
+                      }`}
+                      onClick={() => update('eliminacoesIntestinais', form.eliminacoesIntestinais === true ? undefined : true)}
+                    >
+                      Presentes
+                    </button>
+                    <button
+                      type="button"
+                      className={`flex-1 rounded-lg px-3 py-2 text-xs font-semibold transition-all duration-200 ${
+                        form.eliminacoesIntestinais === false
+                          ? 'bg-slate-500 text-white shadow-sm'
+                          : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-600'
+                      }`}
+                      onClick={() => update('eliminacoesIntestinais', form.eliminacoesIntestinais === false ? undefined : false)}
+                    >
+                      Ausentes
+                    </button>
+                  </div>
                 </div>
               </div>
               <textarea
