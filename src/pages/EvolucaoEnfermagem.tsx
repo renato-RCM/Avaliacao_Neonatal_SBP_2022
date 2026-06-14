@@ -735,51 +735,54 @@ function ExameFisicoRow({
   field: ExameFisicoField;
   onChange: (patch: Partial<ExameFisicoField>) => void;
 }) {
-  const avaliado = field.normal || !!field.descricao;
-  const alterado = !field.normal && !!field.descricao;
+  const isNormal = field.normal;
+  const isAltered = !field.normal && field.descricao !== undefined;
+  const hasDescricao = !!field.descricao;
+
   return (
     <div className="rounded-lg border border-slate-200 p-3">
       <div className="flex items-start gap-3">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             <span className="text-sm font-semibold text-slate-800">{label}</span>
-            {field.normal && (
+            {isNormal && (
               <span className="badge bg-success-100 text-success-700 text-[10px]">
                 <CheckCircle2 className="h-3 w-3" />
                 Normal
               </span>
             )}
-            {alterado && (
+            {isAltered && (
               <span className="badge bg-warning-100 text-warning-700 text-[10px]">
                 <AlertTriangle className="h-3 w-3" />
                 Alterado
               </span>
             )}
-            {!avaliado && (
+            {!isNormal && !isAltered && (
               <span className="badge bg-slate-100 text-slate-500 text-[10px]">
                 Não avaliado
               </span>
             )}
           </div>
-          {field.normal && !field.descricao && (
+          {isNormal && !hasDescricao && (
             <p className="mt-0.5 text-xs text-slate-500">{normalLabel}</p>
           )}
         </div>
         <button
           type="button"
           className={`text-xs font-semibold px-3 py-1.5 rounded-md transition-colors flex-shrink-0 ${
-            field.normal
-              ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              : alterado
-                ? 'bg-warning-100 text-warning-700 hover:bg-warning-200'
+            isAltered
+              ? 'bg-warning-100 text-warning-700 hover:bg-warning-200'
+              : isNormal
+                ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
           }`}
-          onClick={() => onChange({ normal: !field.normal, descricao: undefined })}
+          onClick={() => onChange({ normal: !field.normal, descricao: field.normal ? '' : undefined })}
         >
-          {field.normal ? 'Marcar alterado' : alterado ? 'Marcar normal' : 'Marcar normal'}
+          {isNormal ? 'Marcar alterado' : 'Marcar normal'}
         </button>
       </div>
-      {alterado && (
+      {/* Textarea aparece sempre que marcado como alterado */}
+      {isAltered && (
         <div className="mt-2">
           <textarea
             className="input min-h-[60px] text-sm"
@@ -790,7 +793,8 @@ function ExameFisicoRow({
           />
         </div>
       )}
-      {field.normal && field.descricao && (
+      {/* Textarea de complemento quando normal mas com texto extra */}
+      {isNormal && hasDescricao && (
         <div className="mt-2">
           <textarea
             className="input min-h-[60px] text-sm"
