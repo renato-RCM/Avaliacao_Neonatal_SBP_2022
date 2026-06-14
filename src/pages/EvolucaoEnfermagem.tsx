@@ -80,6 +80,7 @@ function EvolucaoEnfermagemPage() {
     () => storeEvolucao ?? createDefaultEvolucao(),
   );
   const [previewExpanded, setPreviewExpanded] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   // ── Dados automáticos calculados ──
   const capurro = useMemo(() => {
@@ -154,6 +155,24 @@ function EvolucaoEnfermagemPage() {
 
   // ── Salvar e ir para relatório ──
   function handleSalvarEGerar() {
+    // Valida: sistemas marcados como alterado devem ter descrição preenchida
+    const pendentes: string[] = [];
+    for (const s of SISTEMAS) {
+      const field = form[s.key] as ExameFisicoField | undefined;
+      if (field && !field.normal && (!field.descricao || !field.descricao.trim())) {
+        pendentes.push(s.label);
+      }
+    }
+    if (pendentes.length > 0) {
+      setValidationError(
+        `Os seguintes sistemas estão marcados como alterados mas sem descrição: ${pendentes.join(', ')}. Preencha a descrição ou marque como normal.`,
+      );
+      // Rola para o bloco de exame físico
+      const el = document.getElementById('bloco-exame-fisico');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    setValidationError(null);
     setEvolucao(form);
     navigate(getRelatorioPath(modo));
   }
@@ -545,6 +564,7 @@ function EvolucaoEnfermagemPage() {
         </SectionCard>
 
         {/* ─── Bloco 5: Exame físico por sistemas ─── */}
+        <div id="bloco-exame-fisico">
         <SectionCard
           title="5. Exame físico por sistemas"
           description="Marque os sistemas normais ou descreva alterações."
@@ -574,6 +594,7 @@ function EvolucaoEnfermagemPage() {
             })}
           </div>
         </SectionCard>
+        </div>
 
         {/* ─── Bloco 6: Reflexos neurológicos ─── */}
         <SectionCard
@@ -683,6 +704,14 @@ function EvolucaoEnfermagemPage() {
         </SectionCard>
 
         {/* ─── Botões de ação ─── */}
+        {validationError && (
+          <div className="rounded-lg border border-danger-200 bg-danger-50 p-4 text-sm text-danger-700">
+            <p className="flex items-start gap-2 font-semibold">
+              <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+              {validationError}
+            </p>
+          </div>
+        )}
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
           <button
             type="button"

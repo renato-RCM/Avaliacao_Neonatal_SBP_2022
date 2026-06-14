@@ -330,17 +330,24 @@ function gerarExameFisicoTextos(evolucao: EvolucaoEnfermagemData): string[] {
     const field = evolucao[sistema.key] as { normal: boolean; descricao?: string } | undefined;
     if (!field) continue;
 
+    // Sistema não avaliado (nem normal nem alterado): pula
+    if (!field.normal && field.descricao === undefined) continue;
+
     if (field.normal && !field.descricao) {
-      // Normal sem descrição extra: exibe o texto normal
+      // Normal sem descrição extra: exibe o texto normal padrão
       result.push(`${sistema.titulo}: ${sistema.normalText}`);
     } else if (field.normal && field.descricao) {
-      // Normal com complemento
+      // Normal com complemento/observação
       result.push(`${sistema.titulo}: ${field.descricao}`);
-    } else if (!field.normal && field.descricao) {
-      // Alterado com descrição
-      result.push(`${sistema.titulo}: ${field.descricao}`);
+    } else if (!field.normal) {
+      // Alterado (descricao pode ser string vazia ou preenchida)
+      const desc = field.descricao?.trim();
+      if (desc) {
+        result.push(`${sistema.titulo}: ${desc}`);
+      } else {
+        result.push(`${sistema.titulo}: ALTERADO — sem descrição informada.`);
+      }
     }
-    // Se alterado sem descrição, pula (não exibe)
   }
 
   return result;
