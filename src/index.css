@@ -52,12 +52,13 @@
   }
 
   .card-selected {
-    @apply border-violet-500 ring-2 ring-violet-500/20 bg-violet-50/80;
+    @apply border-violet-500 ring-2 ring-violet-500/20 bg-violet-50/80 scale-[1.02] shadow-md;
   }
 
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold
-           transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 min-h-[48px];
+           transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 min-h-[48px]
+           active:scale-95;
   }
 
   .btn-primary {

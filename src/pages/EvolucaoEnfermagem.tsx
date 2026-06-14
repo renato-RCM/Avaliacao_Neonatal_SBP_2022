@@ -1,6 +1,6 @@
 import { useMemo, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Stethoscope, Eye, CheckCircle2, AlertTriangle, ChevronUp, X } from 'lucide-react';
+import { Stethoscope, Eye, CheckCircle2, AlertTriangle, ChevronUp, X, Baby, User, Heart, Activity, Brain, ClipboardCheck, FileText } from 'lucide-react';
 import { Layout } from '@/components/common/Layout';
 import { SectionCard } from '@/components/common/SectionCard';
 import { Alert } from '@/components/common/Alert';
@@ -197,30 +197,33 @@ function EvolucaoEnfermagemPage() {
         <SectionCard
           title="1. Dados automáticos do RN"
           description="Informações já registradas na avaliação (somente leitura)."
+          badge={<span className="badge bg-violet-100 text-violet-700"><Baby className="h-3 w-3" /> Auto</span>}
         >
           <div className="grid grid-cols-2 gap-2 text-sm sm:grid-cols-4">
-            <AutoLine label="Identificação" value={rn.identificacao || 'Anônimo'} />
+            <AutoLine label="Identificação" value={rn.identificacao || 'Anônimo'} accent="violet" />
             <AutoLine
               label="Sexo"
               value={rn.sexo === 'M' ? 'Masculino' : rn.sexo === 'F' ? 'Feminino' : '—'}
+              accent="sky"
             />
-            <AutoLine label="Peso" value={rn.pesoGramas ? `${rn.pesoGramas} g` : '—'} />
+            <AutoLine label="Peso" value={rn.pesoGramas ? `${rn.pesoGramas} g` : '—'} accent="emerald" />
             <AutoLine
               label="Data/Hora nasc."
               value={rn.dataHoraNascimento ? new Date(rn.dataHoraNascimento).toLocaleString('pt-BR') : '—'}
+              accent="amber"
             />
             {capurro && (
               <>
-                <AutoLine label="Método Capurro" value={capurroConfig.methods[capurro.metodo]?.label ?? '—'} />
-                <AutoLine label="IG (semanas+dias)" value={capurro.idadeGestacionalLabel} />
-                <AutoLine label="Classificação" value={capurro.classificacaoTermo} />
+                <AutoLine label="Método Capurro" value={capurroConfig.methods[capurro.metodo]?.label ?? '—'} accent="rose" />
+                <AutoLine label="IG (semanas+dias)" value={capurro.idadeGestacionalLabel} accent="rose" />
+                <AutoLine label="Classificação" value={capurro.classificacaoTermo} accent="rose" />
               </>
             )}
             {growth && growth.status === 'ok' && (
-              <AutoLine label="PIG / AIG / GIG" value={growth.classificacao ?? '—'} />
+              <AutoLine label="PIG / AIG / GIG" value={growth.classificacao ?? '—'} accent="emerald" />
             )}
             {apgar1 && apgar5 && (
-              <AutoLine label="Apgar 1'/5'" value={`${apgar1.total}/${apgar5.total}`} />
+              <AutoLine label="Apgar 1'/5'" value={`${apgar1.total}/${apgar5.total}`} accent="sky" />
             )}
           </div>
         </SectionCard>
@@ -229,6 +232,7 @@ function EvolucaoEnfermagemPage() {
         <SectionCard
           title="2. Dados maternos e exames"
           description="Informações da puérpera e exames relevantes."
+          badge={<span className="badge bg-pink-100 text-pink-700"><User className="h-3 w-3" /> Materno</span>}
         >
           <div className="space-y-4">
             {/* Via de nascimento */}
@@ -380,6 +384,7 @@ function EvolucaoEnfermagemPage() {
         <SectionCard
           title="3. Amamentação, eliminações e vínculo"
           description="Registro do primeiro contato e eliminações do RN."
+          badge={<span className="badge bg-rose-100 text-rose-700"><Heart className="h-3 w-3" /> Vínculo</span>}
         >
           <div className="space-y-4">
             {/* Amamentação */}
@@ -518,6 +523,7 @@ function EvolucaoEnfermagemPage() {
         <SectionCard
           title="4. Sinais vitais e estado geral"
           description="Registre os sinais vitais aferidos."
+          badge={<span className="badge bg-amber-100 text-amber-700"><Activity className="h-3 w-3" /> Vitais</span>}
         >
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <div>
@@ -580,6 +586,7 @@ function EvolucaoEnfermagemPage() {
         <SectionCard
           title="5. Exame físico por sistemas"
           description="Marque os sistemas normais ou descreva alterações."
+          badge={<span className="badge bg-emerald-100 text-emerald-700"><Stethoscope className="h-3 w-3" /> Exame</span>}
           rightSlot={
             <button
               type="button"
@@ -612,6 +619,7 @@ function EvolucaoEnfermagemPage() {
         <SectionCard
           title="6. Reflexos neurológicos"
           description="Avaliação dos reflexos primitivos do RN."
+          badge={<span className="badge bg-sky-100 text-sky-700"><Brain className="h-3 w-3" /> Neuro</span>}
         >
           <div className="flex items-center gap-3 mb-3">
             <button
@@ -654,7 +662,8 @@ function EvolucaoEnfermagemPage() {
         </SectionCard>
 
         {/* ─── Bloco 7: Intervenções de enfermagem ─── */}
-        <SectionCard title="7. Intervenções de enfermagem" description="Uma intervenção por linha.">
+        <SectionCard title="7. Intervenções de enfermagem" description="Uma intervenção por linha."
+          badge={<span className="badge bg-violet-100 text-violet-700"><ClipboardCheck className="h-3 w-3" /> Ações</span>}>
           <textarea
             className="input min-h-[120px]"
             placeholder={`- Oriento verticalização do RN após mamadas por 20 minutos.\n- Oriento cuidados com RN e evitar superaquecer o mesmo.\n- Observo mamada e realizo orientações necessárias.`}
@@ -665,7 +674,8 @@ function EvolucaoEnfermagemPage() {
         </SectionCard>
 
         {/* ─── Bloco 8: Prescrição de enfermagem ─── */}
-        <SectionCard title="8. Prescrição de enfermagem" description="Uma prescrição por linha.">
+        <SectionCard title="8. Prescrição de enfermagem" description="Uma prescrição por linha."
+          badge={<span className="badge bg-purple-100 text-purple-700"><FileText className="h-3 w-3" /> Prescrição</span>}>
           <textarea
             className="input min-h-[120px]"
             placeholder={`- Sinais vitais a cada 6h.\n- Incentivar amamentação.\n- Observar amamentação.\n- Observar e registrar eliminações vesicais e intestinais.`}
@@ -679,6 +689,7 @@ function EvolucaoEnfermagemPage() {
         <SectionCard
           title="9. Prévia da evolução final"
           description="Visualize e edite o texto que será incluído no relatório."
+          badge={<span className="badge bg-indigo-100 text-indigo-700"><Eye className="h-3 w-3" /> Preview</span>}
           rightSlot={
             <button
               type="button"
@@ -756,11 +767,19 @@ function EvolucaoEnfermagemPage() {
 // Componentes auxiliares
 // ---------------------------------------------------------------------------
 
-function AutoLine({ label, value }: { label: string; value: string }) {
+function AutoLine({ label, value, accent }: { label: string; value: string; accent?: 'rose' | 'emerald' | 'amber' | 'violet' | 'sky' }) {
+  const colors: Record<string, string> = {
+    rose: 'border-l-rose-400 bg-rose-50/50',
+    emerald: 'border-l-emerald-400 bg-emerald-50/50',
+    amber: 'border-l-amber-400 bg-amber-50/50',
+    violet: 'border-l-violet-400 bg-violet-50/50',
+    sky: 'border-l-sky-400 bg-sky-50/50',
+  };
+  const ac = accent ? colors[accent] : 'border-l-violet-300 bg-violet-50/30';
   return (
-    <div className="rounded-xl border border-violet-100 bg-violet-50/30 p-2">
+    <div className={`rounded-lg border border-violet-100 border-l-2 ${ac} p-2.5 transition-all hover:shadow-sm`}>
       <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
-      <p className="text-sm font-semibold text-slate-900">{value}</p>
+      <p className="mt-0.5 text-sm font-bold text-slate-800">{value}</p>
     </div>
   );
 }
@@ -781,7 +800,13 @@ function ExameFisicoRow({
   const hasDescricao = !!field.descricao;
 
   return (
-    <div className="rounded-xl border border-violet-100 p-3">
+    <div className={`rounded-xl border p-3 transition-all duration-200 hover:shadow-sm ${
+      isAltered
+        ? 'border-warning-200 bg-warning-50/30 border-l-2 border-l-warning-400'
+        : isNormal
+          ? 'border-emerald-200 bg-emerald-50/20 border-l-2 border-l-emerald-400'
+          : 'border-violet-100 bg-white'
+    }`}>
       <div className="flex items-start gap-3">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
