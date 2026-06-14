@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Copy, Printer, RotateCcw, FileText, Stethoscope, Pencil } from 'lucide-react';
+import { Copy, Printer, RotateCcw, FileText, Stethoscope, Pencil, Loader2 } from 'lucide-react';
+import html2pdf from 'html2pdf.js';
 import { Layout } from '@/components/common/Layout';
 import { Alert } from '@/components/common/Alert';
 import { RequireMode, useEvaluationMode } from '@/hooks/useEvaluationMode';
@@ -33,6 +34,8 @@ function RelatorioPage() {
   const evolucao = useEvaluationStore((s) => s.evolucao);
   const reset = useEvaluationStore((s) => s.reset);
   const [copiado, setCopiado] = useState(false);
+  const [gerandoPDF, setGerandoPDF] = useState(false);
+  const artigoRef = useRef<HTMLElement>(null);
 
   const apgarResultados = useMemo(() => {
     return MINUTOS.map((m) => {
@@ -111,6 +114,24 @@ function RelatorioPage() {
     }
   }
 
+  async function handlePDF() {
+    if (!artigoRef.current || gerandoPDF) return;
+    setGerandoPDF(true);
+    try {
+      const el = artigoRef.current;
+      const nomeArquivo = `avaliacao-neonatal-${rn.identificacao || 'rn'}-${new Date().toISOString().slice(0, 10)}.pdf`;
+      await html2pdf().set({
+        margin: [10, 10, 10, 10],
+        filename: nomeArquivo,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      }).from(el).save();
+    } finally {
+      setGerandoPDF(false);
+    }
+  }
+
   function handleNova() {
     reset();
     navigate('/');
@@ -138,13 +159,17 @@ function RelatorioPage() {
           <Copy className="h-4 w-4" aria-hidden />
           {copiado ? 'Copiado!' : 'Copiar texto do relatório'}
         </button>
-        <button onClick={() => window.print()} className="btn-primary">
-          <Printer className="h-4 w-4" aria-hidden />
-          Imprimir / salvar PDF
+        <button onClick={handlePDF} disabled={gerandoPDF} className="btn-primary">
+          {gerandoPDF ? (
+            <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+          ) : (
+            <Printer className="h-4 w-4" aria-hidden />
+          )}
+          {gerandoPDF ? 'Gerando PDF...' : 'Gerar PDF'}
         </button>
       </div>
 
-      <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-card sm:p-6">
+      <article ref={artigoRef} className="rounded-xl border border-slate-200 bg-white p-5 shadow-card sm:p-6">
         <header className="mb-4 border-b border-slate-200 pb-3">
           <p className="text-xs uppercase tracking-wide text-slate-500">Identificação</p>
           <p className="text-base font-semibold text-slate-900">
