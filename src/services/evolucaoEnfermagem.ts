@@ -15,10 +15,6 @@ function plural(n: number, singular: string, pluralForm: string): string {
   return n === 1 ? singular : pluralForm;
 }
 
-function optionalLine(value: string | undefined | null): string {
-  return value ? `${value}\n` : '';
-}
-
 /**
  * Gera o texto completo da evolução de enfermagem a partir dos dados do RN +
  * classificações já calculadas + formulário preenchido.

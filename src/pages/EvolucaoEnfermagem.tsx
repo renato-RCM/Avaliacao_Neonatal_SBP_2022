@@ -1,6 +1,6 @@
 import { useMemo, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Stethoscope, Eye, CheckCircle2, AlertTriangle, ChevronDown, ChevronUp, X } from 'lucide-react';
+import { Stethoscope, Eye, CheckCircle2, AlertTriangle, ChevronUp, X } from 'lucide-react';
 import { Layout } from '@/components/common/Layout';
 import { SectionCard } from '@/components/common/SectionCard';
 import { Alert } from '@/components/common/Alert';
@@ -36,8 +36,6 @@ interface SistemaInfo {
 const TIPOS_SANGUINEOS = [
   'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-',
 ] as const;
-
-type TipoSanguineo = (typeof TIPOS_SANGUINEOS)[number];
 
 // ---------------------------------------------------------------------------
 
@@ -669,7 +667,7 @@ function EvolucaoEnfermagemPage() {
             <textarea
               className="input min-h-[300px] font-mono text-xs"
               value={textoEvolucao}
-              onChange={(e) => {
+              onChange={() => {
                 // Permite edição livre do texto final
                 // (a edição manual não volta para o formulário, é o texto final)
               }}

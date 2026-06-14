@@ -48,6 +48,8 @@ const initialState: Omit<
   | 'toggleApgarIntervencao'
   | 'setCapurroMetodo'
   | 'setCapurroResposta'
+  | 'setEvolucao'
+  | 'clearEvolucao'
   | 'reset'
 > = {
   rn: {},
