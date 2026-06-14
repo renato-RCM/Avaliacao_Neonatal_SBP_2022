@@ -27,22 +27,22 @@ const MODOS: {
   {
     modo: 'completa',
     icon: <ClipboardList className="h-6 w-6" aria-hidden />,
-    accent: 'from-clinical-600 to-clinical-800',
+    accent: 'from-violet-600 to-purple-700',
   },
   {
     modo: 'apgar',
     icon: <Heart className="h-6 w-6" aria-hidden />,
-    accent: 'from-rose-600 to-rose-800',
+    accent: 'from-rose-500 to-pink-600',
   },
   {
     modo: 'capurro_peso',
     icon: <LineChart className="h-6 w-6" aria-hidden />,
-    accent: 'from-emerald-600 to-emerald-800',
+    accent: 'from-emerald-500 to-teal-600',
   },
   {
     modo: 'enfermagem',
     icon: <Stethoscope className="h-6 w-6" aria-hidden />,
-    accent: 'from-violet-600 to-violet-800',
+    accent: 'from-fuchsia-600 to-purple-700',
   },
 ];
 

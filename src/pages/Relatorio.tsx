@@ -120,7 +120,7 @@ function RelatorioPage() {
     <Layout showPrint>
       <div className="mb-5 flex items-start justify-between gap-3">
         <div>
-          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-clinical-700">
+          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-violet-600">
             <FileText className="h-4 w-4" aria-hidden /> Relatório final
           </p>
           <h1 className="mt-1 text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -216,10 +216,10 @@ function RelatorioPage() {
         {textoEvolucao && (
           <section className="mb-5">
             <h2 className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-slate-700">
-              <Stethoscope className="h-4 w-4 text-clinical-600" aria-hidden />
+              <Stethoscope className="h-4 w-4 text-violet-600" aria-hidden />
               Evolução de Enfermagem do RN
             </h2>
-            <div className="rounded-lg border border-clinical-200 bg-clinical-50/30 p-4">
+            <div className="rounded-2xl border border-violet-200 bg-violet-50/30 p-4">
               <pre className="whitespace-pre-wrap font-mono text-xs text-slate-800 leading-relaxed">
                 {textoEvolucao}
               </pre>

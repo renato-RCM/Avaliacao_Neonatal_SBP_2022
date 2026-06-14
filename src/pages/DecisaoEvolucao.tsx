@@ -23,7 +23,7 @@ function DecisaoEvolucaoPage() {
   return (
     <Layout>
       <div className="mb-5">
-        <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-clinical-700">
+        <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-violet-600">
           <Stethoscope className="h-4 w-4" aria-hidden /> Evolução de Enfermagem
         </p>
         <h1 className="mt-1 text-2xl font-bold text-slate-900 sm:text-3xl">

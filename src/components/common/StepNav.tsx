@@ -42,9 +42,9 @@ export function StepNav({
         </span>
         <span>{progress}%</span>
       </div>
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-violet-100">
         <div
-          className="h-full rounded-full bg-clinical-600 transition-[width] duration-300"
+          className="h-full rounded-full bg-gradient-to-r from-violet-500 to-purple-600 transition-[width] duration-500"
           style={{ width: `${progress}%` }}
           role="progressbar"
           aria-valuenow={progress}

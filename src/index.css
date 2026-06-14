@@ -9,7 +9,7 @@
   }
 
   body {
-    @apply bg-slate-50 text-slate-900 antialiased;
+    @apply bg-violet-50/50 text-slate-800 antialiased;
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
@@ -17,7 +17,7 @@
   *,
   *::before,
   *::after {
-    @apply border-slate-200;
+    @apply border-violet-100;
   }
 
   button,
@@ -47,35 +47,38 @@
   }
 
   .card-clickable {
-    @apply cursor-pointer rounded-xl border border-slate-200 bg-white p-4 shadow-card transition-all
-           hover:border-clinical-300 hover:shadow-card-hover active:scale-[0.99];
+    @apply cursor-pointer rounded-2xl border border-violet-100 bg-white p-4 shadow-card transition-all duration-200
+           hover:border-violet-300 hover:shadow-card-hover active:scale-[0.99];
   }
 
   .card-selected {
-    @apply border-clinical-600 ring-2 ring-clinical-600/30 bg-clinical-50;
+    @apply border-violet-500 ring-2 ring-violet-500/20 bg-violet-50/80;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold
-           transition-colors disabled:cursor-not-allowed disabled:opacity-50 min-h-[48px];
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold
+           transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 min-h-[48px];
   }
 
   .btn-primary {
-    @apply btn bg-clinical-600 text-white shadow-sm hover:bg-clinical-700 active:bg-clinical-800;
+    @apply btn bg-gradient-to-r from-violet-600 to-violet-700 text-white shadow-md shadow-violet-500/25
+           hover:from-violet-700 hover:to-violet-800 hover:shadow-lg hover:shadow-violet-500/30
+           active:from-violet-800 active:to-violet-800;
   }
 
   .btn-secondary {
-    @apply btn bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 active:bg-slate-100;
+    @apply btn bg-white text-slate-700 border border-violet-200 hover:bg-violet-50 hover:border-violet-300
+           active:bg-violet-100;
   }
 
   .btn-ghost {
-    @apply btn bg-transparent text-slate-600 hover:bg-slate-100;
+    @apply btn bg-transparent text-slate-500 hover:bg-violet-50 hover:text-violet-700;
   }
 
   .input {
-    @apply w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-base shadow-sm
+    @apply w-full rounded-xl border border-violet-200 bg-white px-4 py-3 text-base shadow-sm
            transition-colors placeholder:text-slate-400
-           focus:border-clinical-600 focus:outline-none focus:ring-2 focus:ring-clinical-600/30;
+           focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500/20;
   }
 
   .label {
@@ -101,7 +104,6 @@
     break-before: page;
   }
 
-  /* Garante que o artigo do relatório ocupe a largura total */
   article {
     border: none !important;
     box-shadow: none !important;
@@ -110,22 +112,21 @@
     max-width: 100% !important;
   }
 
-  /* Remove fundos e bordas de containers internos */
   .rounded-xl,
-  .rounded-lg {
+  .rounded-lg,
+  .rounded-2xl,
+  .rounded-3xl {
     border: 1px solid #e2e8f0 !important;
     box-shadow: none !important;
     break-inside: avoid;
   }
 
-  /* Garante que textos pré-formatados quebrem linha */
   pre {
     white-space: pre-wrap !important;
     word-wrap: break-word !important;
     font-size: 10px !important;
   }
 
-  /* Tabelas mantêm estrutura */
   table {
     border-collapse: collapse;
     width: 100%;
@@ -136,13 +137,11 @@
     padding: 4px 8px;
   }
 
-  /* Badges mantêm cores no print */
   .badge {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  /* Oculta header/footer da impressão (navegador) */
   @page {
     margin: 1.5cm;
     size: A4;

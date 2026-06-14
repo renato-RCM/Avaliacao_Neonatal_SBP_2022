@@ -10,7 +10,7 @@ interface SectionCardProps {
 
 export function SectionCard({ title, description, children, badge, rightSlot }: SectionCardProps) {
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-4 shadow-card sm:p-5">
+    <section className="rounded-2xl border border-violet-100 bg-white p-4 shadow-card sm:p-5">
       <header className="mb-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
