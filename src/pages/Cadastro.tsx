@@ -125,8 +125,10 @@ function CadastroForm() {
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
-              className={`card-clickable !py-4 text-center font-semibold ${
-                sexo === 'M' ? 'card-selected text-violet-700' : 'text-slate-700'
+              className={`card-clickable !py-4 text-center font-semibold transition-all duration-200 ${
+                sexo === 'M'
+                  ? 'border-sky-500 ring-2 ring-sky-500/20 bg-sky-50 text-sky-700 scale-[1.02] shadow-md'
+                  : 'text-slate-700'
               }`}
               onClick={() => setSexo('M')}
               aria-pressed={sexo === 'M'}
@@ -135,8 +137,10 @@ function CadastroForm() {
             </button>
             <button
               type="button"
-              className={`card-clickable !py-4 text-center font-semibold ${
-                sexo === 'F' ? 'card-selected text-violet-700' : 'text-slate-700'
+              className={`card-clickable !py-4 text-center font-semibold transition-all duration-200 ${
+                sexo === 'F'
+                  ? 'border-pink-500 ring-2 ring-pink-500/20 bg-pink-50 text-pink-700 scale-[1.02] shadow-md'
+                  : 'text-slate-700'
               }`}
               onClick={() => setSexo('F')}
               aria-pressed={sexo === 'F'}
