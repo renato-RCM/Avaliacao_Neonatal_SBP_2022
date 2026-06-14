@@ -346,20 +346,32 @@ function EvolucaoEnfermagemPage() {
             </div>
 
             <div>
-              <label className="label" htmlFor="testes-rapidos">
-                Testes rápidos maternos na admissão (HIV e Sífilis)
-              </label>
-              <select
-                id="testes-rapidos"
-                className="input"
-                value={form.testesRapidosMaternos ?? ''}
-                onChange={(e) => update('testesRapidosMaternos', e.target.value || undefined)}
-              >
-                <option value="">Selecione...</option>
-                <option value="não reagentes">Não reagentes</option>
-                <option value="reagentes">Reagentes</option>
-                <option value="não realizados">Não realizados</option>
-              </select>
+              <span className="label">Testes rápidos maternos na admissão</span>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                {([
+                  ['sifilisMae', 'Sífilis'],
+                  ['hivMae', 'HIV'],
+                  ['hepatiteBMae', 'Hepatite B'],
+                  ['hepatiteCMae', 'Hepatite C'],
+                ] as const).map(([key, label]) => (
+                  <div key={key}>
+                    <label className="mb-1 block text-xs font-medium text-slate-600" htmlFor={`teste-${key}`}>
+                      {label}
+                    </label>
+                    <select
+                      id={`teste-${key}`}
+                      className="input !py-2 text-sm"
+                      value={(form[key] as string) ?? ''}
+                      onChange={(e) => update(key, (e.target.value || undefined) as EvolucaoEnfermagemData[typeof key])}
+                    >
+                      <option value="">Selecione...</option>
+                      <option value="nao_reagente">Não reagente</option>
+                      <option value="reagente">Reagente</option>
+                      <option value="nao_necessario">Não necessário</option>
+                    </select>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </SectionCard>

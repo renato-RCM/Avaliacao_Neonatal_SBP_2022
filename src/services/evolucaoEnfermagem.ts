@@ -71,8 +71,26 @@ export function gerarTextoEvolucao(params: {
   }
 
   // ── Testes rápidos ──
-  if (evolucao.testesRapidosMaternos) {
-    linhas.push(`# Testes rápidos maternos na admissão (HIV e Sífilis): ${evolucao.testesRapidosMaternos}`);
+  const testesLabel: Record<string, string> = {
+    nao_reagente: 'Não reagente',
+    reagente: 'Reagente',
+    nao_necessario: 'Não necessário',
+  };
+  const testesRealizados: string[] = [];
+  if (evolucao.sifilisMae) {
+    testesRealizados.push(`Sífilis: ${testesLabel[evolucao.sifilisMae]}`);
+  }
+  if (evolucao.hivMae) {
+    testesRealizados.push(`HIV: ${testesLabel[evolucao.hivMae]}`);
+  }
+  if (evolucao.hepatiteBMae) {
+    testesRealizados.push(`Hepatite B: ${testesLabel[evolucao.hepatiteBMae]}`);
+  }
+  if (evolucao.hepatiteCMae) {
+    testesRealizados.push(`Hepatite C: ${testesLabel[evolucao.hepatiteCMae]}`);
+  }
+  if (testesRealizados.length > 0) {
+    linhas.push(`# Testes rápidos maternos na admissão: ${testesRealizados.join('; ')}`);
   }
 
   // ── Capurro ──

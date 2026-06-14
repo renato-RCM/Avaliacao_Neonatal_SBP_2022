@@ -140,12 +140,17 @@ export interface ExameFisicoField {
 
 export type ViaNascimento = 'vaginal' | 'cesarea' | 'forceps';
 
+export type TesteRapidoResultado = 'nao_reagente' | 'reagente' | 'nao_necessario';
+
 export interface EvolucaoEnfermagemData {
   // Bloco 2: Dados maternos e exames
   viaNascimento?: ViaNascimento;
   tipoSanguineoMae?: string;
   tipoSanguineoRN?: string;
-  testesRapidosMaternos?: string;
+  sifilisMae?: TesteRapidoResultado;
+  hivMae?: TesteRapidoResultado;
+  hepatiteBMae?: TesteRapidoResultado;
+  hepatiteCMae?: TesteRapidoResultado;
 
   // Bloco 3: Amamentação, eliminações e vínculo
   amamentacaoDificuldade?: boolean;
