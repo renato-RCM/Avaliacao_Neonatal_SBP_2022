@@ -144,7 +144,23 @@ export function gerarTextoEvolucao(params: {
 
   // ── Vínculo ──
   if (evolucao.vinculoBinomio) {
-    linhas.push(evolucao.vinculoBinomio);
+    linhas.push(`# Vínculo do binômio mãe-RN: ${evolucao.vinculoBinomio}`);
+    linhas.push('');
+  }
+
+  // ── Sinais vitais ──
+  const sinaisParts: string[] = [];
+  if (evolucao.frequenciaCardiaca) {
+    sinaisParts.push(`FC: ${evolucao.frequenciaCardiaca} bpm`);
+  }
+  if (evolucao.frequenciaRespiratoria) {
+    sinaisParts.push(`FR: ${evolucao.frequenciaRespiratoria} irpm`);
+  }
+  if (evolucao.temperatura) {
+    sinaisParts.push(`Temperatura: ${evolucao.temperatura}°C`);
+  }
+  if (sinaisParts.length > 0) {
+    linhas.push(`# Sinais vitais: ${sinaisParts.join(' | ')}`);
     linhas.push('');
   }
 
