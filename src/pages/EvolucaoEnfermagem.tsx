@@ -155,6 +155,18 @@ function EvolucaoEnfermagemPage() {
 
   // ── Salvar e ir para relatório ──
   function handleSalvarEGerar() {
+    // Valida campos obrigatórios do bloco 2
+    const obrigatorios: string[] = [];
+    if (!form.viaNascimento) obrigatorios.push('Via de nascimento');
+    if (!form.tipoSanguineoMae) obrigatorios.push('Tipagem sanguínea materna');
+    if (!form.tipoSanguineoRN) obrigatorios.push('Tipagem sanguínea do RN');
+    if (obrigatorios.length > 0) {
+      setValidationError(
+        `Campos obrigatórios não preenchidos: ${obrigatorios.join(', ')}.`,
+      );
+      return;
+    }
+
     // Valida: sistemas não avaliados ou marcados como alterado sem descrição
     const pendentesAlterados: string[] = [];
     const pendentesNaoAvaliados: string[] = [];
@@ -248,7 +260,7 @@ function EvolucaoEnfermagemPage() {
           <div className="space-y-4">
             {/* Via de nascimento */}
             <div>
-              <span className="label">Via de nascimento</span>
+              <span className="label">Via de nascimento <span className="text-danger-600">*</span></span>
               <div className="grid grid-cols-3 gap-2">
                 {([
                   ['vaginal', 'Parto vaginal'],
@@ -274,7 +286,7 @@ function EvolucaoEnfermagemPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {/* Tipagem materna */}
               <div>
-                <span className="label">Tipagem sanguínea materna</span>
+                <span className="label">Tipagem sanguínea materna <span className="text-danger-600">*</span></span>
                 <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-8">
                   {TIPOS_SANGUINEOS.map((tipo) => {
                     const sel = form.tipoSanguineoMae === tipo;
@@ -309,7 +321,7 @@ function EvolucaoEnfermagemPage() {
 
               {/* Tipagem RN */}
               <div>
-                <span className="label">Tipagem sanguínea do RN</span>
+                <span className="label">Tipagem sanguínea do RN <span className="text-danger-600">*</span></span>
                 <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-5">
                   {TIPOS_SANGUINEOS.map((tipo) => {
                     const sel = form.tipoSanguineoRN === tipo;
