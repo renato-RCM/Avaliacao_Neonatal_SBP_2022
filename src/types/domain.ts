@@ -190,7 +190,7 @@ export interface EvolucaoEnfermagemData {
   pulsos: ExameFisicoField;
 
   // Bloco 6: Reflexos neurológicos
-  reflexosNeurologicosNormal: boolean;
+  reflexosNeurologicosNormal?: boolean;
   reflexosNeurologicosDescricao?: string;
 
   // Bloco 7: Intervenções
@@ -198,6 +198,26 @@ export interface EvolucaoEnfermagemData {
 
   // Bloco 8: Prescrição
   prescricao?: string;
+}
+
+export function getDefaultIntervencoes(): string {
+  return [
+    '- Oriento verticalização do RN após mamadas por 20 minutos.',
+    '- Oriento cuidados com RN e evitar superaquecer o mesmo.',
+    '- Observo mamada e realizo orientações necessárias.',
+    '- Orientações iniciais quanto a amamentação.',
+    '- Incentivo amamentação.',
+  ].join('\n');
+}
+
+export function getDefaultPrescricao(): string {
+  return [
+    '- Sinais vitais a cada 6h.',
+    '- Incentivar amamentação.',
+    '- Observar amamentação.',
+    '- Observar e registrar eliminações vesicais e intestinais.',
+    '- Observar vinculação do binômio e com acompanhante.',
+  ].join('\n');
 }
 
 export function createDefaultExameFisicoField(): ExameFisicoField {
@@ -228,7 +248,8 @@ export function createDefaultEvolucao(): EvolucaoEnfermagemData {
     extremidades: createDefaultExameFisicoField(),
     perfusao: createDefaultExameFisicoField(),
     pulsos: createDefaultExameFisicoField(),
-    reflexosNeurologicosNormal: false,
+    intervencoes: getDefaultIntervencoes(),
+    prescricao: getDefaultPrescricao(),
   };
 }
 

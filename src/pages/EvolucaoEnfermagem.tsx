@@ -646,16 +646,16 @@ function EvolucaoEnfermagemPage() {
             <button
               type="button"
               className={`flex-1 rounded-xl border-2 px-4 py-3 text-sm font-semibold transition-all duration-200 ${
-                form.reflexosNeurologicosNormal && !form.reflexosNeurologicosDescricao
+                form.reflexosNeurologicosNormal === true
                   ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-sm'
                   : 'border-violet-100 bg-white text-slate-500 hover:border-violet-300'
               }`}
               onClick={() => {
-                update('reflexosNeurologicosNormal', true);
+                update('reflexosNeurologicosNormal', form.reflexosNeurologicosNormal === true ? undefined : true);
                 update('reflexosNeurologicosDescricao', undefined);
               }}
             >
-              <CheckCircle2 className={`mr-1.5 inline h-4 w-4 ${form.reflexosNeurologicosNormal && !form.reflexosNeurologicosDescricao ? 'text-emerald-500' : 'text-slate-300'}`} />
+              <CheckCircle2 className={`mr-1.5 inline h-4 w-4 ${form.reflexosNeurologicosNormal === true ? 'text-emerald-500' : 'text-slate-300'}`} />
               De acordo com a idade
             </button>
             <button
@@ -665,7 +665,7 @@ function EvolucaoEnfermagemPage() {
                   ? 'border-amber-500 bg-amber-50 text-amber-700 shadow-sm'
                   : 'border-violet-100 bg-white text-slate-500 hover:border-violet-300'
               }`}
-              onClick={() => update('reflexosNeurologicosNormal', false)}
+              onClick={() => update('reflexosNeurologicosNormal', form.reflexosNeurologicosNormal === false ? undefined : false)}
             >
               <AlertTriangle className={`mr-1.5 inline h-4 w-4 ${form.reflexosNeurologicosNormal === false ? 'text-amber-500' : 'text-slate-300'}`} />
               Descrever achados
