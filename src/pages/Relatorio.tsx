@@ -378,8 +378,7 @@ function buildReportText({
   textoEvolucao: string | null;
 }): string {
   const linhas: string[] = [];
-  linhas.push(`${getRelatorioTitle(modo)} — SBP 2022`);
-  linhas.push(`Módulo: ${MODE_LABELS[modo]}`);
+  linhas.push(`Relatório: ${MODE_LABELS[modo]}`);
   linhas.push('');
   linhas.push(`Identificação: ${rn.identificacao || 'RN (anônimo)'}`);
   linhas.push(
@@ -395,7 +394,9 @@ function buildReportText({
     linhas.push('Boletim de Apgar ampliado:');
     MINUTOS.forEach((m, idx) => {
       const r = apgarResultados[idx];
-      linhas.push(`  ${m}º min: ${r ? r.total : 'não registrado'}`);
+      if (r) {
+        linhas.push(`  ${m}º min: ${r.total}`);
+      }
     });
     linhas.push('');
   }
