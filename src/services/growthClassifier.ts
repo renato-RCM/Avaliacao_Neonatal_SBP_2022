@@ -85,7 +85,7 @@ export function classificarPesoPorIdadeGestacional({
     };
   }
 
-  const pesoKg = pesoGramas / 1000;
+  const pesoKg = Number((pesoGramas / 1000).toFixed(4));
   let classificacao: 'PIG' | 'AIG' | 'GIG';
   if (pesoKg < ref.p10_kg) {
     classificacao = 'PIG';
